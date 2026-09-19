@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0D1B2A">
+  <title>Login — Finora</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="auth-page">
+
+<div class="auth-wrap">
+
+  <!-- ================= LEFT VISUAL ================= -->
+  <section class="auth-showcase">
+
+    <div class="noise"></div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="glow glow-three"></div>
+
+    <div class="showcase-content">
+
+      <div class="auth-brand">
+        <span class="auth-logo">F</span>
+        <span>Finora</span>
+      </div>
+
+      <div class="showcase-copy">
+        <div class="mini-pill">
+          <span class="pulse-dot"></span>
+          YOUR MONEY. YOUR WAY.
+        </div>
+
+        <h1>
+          Your money,
+          <span>but make it</span>
+          make sense.
+        </h1>
+
+        <p>
+          Track it. Plan it. Grow it.
+          Everything you need to stay on top of your money —
+          without the boring spreadsheets.
+        </p>
+      </div>
+
+
+      <!-- FLOATING BALANCE CARD -->
+      <div class="float-card balance-float">
+
+        <div class="float-top">
+          <span>Available balance</span>
+          <span class="float-menu">•••</span>
+        </div>
+
+        <strong>₹84,250</strong>
+
+        <div class="balance-meta">
+          <span class="balance-up">↗ 12.8%</span>
+          <span>this month</span>
+        </div>
+
+        <div class="mini-chart">
+          <span style="height:28%"></span>
+          <span style="height:42%"></span>
+          <span style="height:35%"></span>
+          <span style="height:55%"></span>
+          <span style="height:48%"></span>
+          <span style="height:72%"></span>
+          <span style="height:63%"></span>
+          <span style="height:88%"></span>
+          <span style="height:76%"></span>
+          <span style="height:96%"></span>
+        </div>
+
+      </div>
+
+
+      <!-- FLOATING SAVINGS CARD -->
+      <div class="float-card savings-float">
+
+        <div class="saving-icon">◎</div>
+
+        <div class="saving-info">
+          <small>Saving for</small>
+          <strong>Dream Trip ✈</strong>
+
+          <div class="saving-progress">
+            <span></span>
+          </div>
+
+          <small>₹32,400 / ₹50,000</small>
+        </div>
+
+        <strong class="saving-percent">65%</strong>
+
+      </div>
+
+
+      <!-- FLOATING SPENDING CARD -->
+      <div class="float-card spending-float">
+
+        <div class="spending-ring">
+          <span>72%</span>
+        </div>
+
+        <div>
+          <small>Monthly spending</small>
+          <strong>₹18,420</strong>
+          <p>↓ 8.4% vs last month</p>
+        </div>
+
+      </div>
+
+
+      <div class="showcase-bottom">
+        <span>TRACK</span>
+        <span>PLAN</span>
+        <span>GROW</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= RIGHT LOGIN ================= -->
+  <section class="auth-form-area">
+
+    <div class="auth-form-inner">
+
+      <div class="mobile-brand">
+        <span class="auth-logo">F</span>
+        <strong>Finora</strong>
+      </div>
+
+
+      <div class="login-heading">
+
+        <div class="welcome-tag">
+          <span>✦</span>
+          Welcome back
+        </div>
+
+        <h2>Let's get you<br><span>back in.</span></h2>
+
+        <p>
+          Your financial world is waiting.
+        </p>
+
+      </div>
+
+
+      <form id="login" class="modern-login-form">
+
+        <label class="input-group">
+
+          <span class="input-label">Email address</span>
+
+          <div class="input-wrap">
+
+            <span class="input-icon">@</span>
+
+            <input
+              id="email"
+              type="email"
+              required
+              autocomplete="email"
+              placeholder="you@example.com"
+            >
+
+          </div>
+
+        </label>
+
+
+        <label class="input-group">
+
+          <span class="input-label">Password</span>
+
+          <div class="input-wrap">
+
+            <span class="input-icon">⌑</span>
+
+            <input
+              id="password"
+              type="password"
+              required
+              autocomplete="current-password"
+              placeholder="Enter your password"
+            >
+
+            <button
+              class="password-toggle"
+              type="button"
+              id="togglePassword"
+              aria-label="Show password"
+            >
+              ◉
+            </button>
+
+          </div>
+
+        </label>
+
+
+        <div id="error" class="login-error"></div>
+
+
+        <button class="login-button" type="submit">
+
+          <span>Sign in</span>
+
+          <span class="button-arrow">↗</span>
+
+        </button>
+
+      </form>
+
+
+      <!-- DEMO ACCOUNTS -->
+      <div class="demo-section">
+
+        <div class="demo-heading">
+          <span>TRY THE DEMO</span>
+          <span class="demo-line"></span>
+        </div>
+
+
+        <div class="demo-users">
+
+          <button
+            class="demo-user"
+            type="button"
+            data-email="riya@example.com"
+            data-password="riya123"
+          >
+            <span class="demo-avatar avatar-purple">R</span>
+
+            <span class="demo-details">
+              <strong>Riya</strong>
+              <small>Personal account</small>
+            </span>
+
+            <span class="demo-arrow">↗</span>
+          </button>
+
+
+          <button
+            class="demo-user"
+            type="button"
+            data-email="rahul@example.com"
+            data-password="rahul123"
+          >
+            <span class="demo-avatar avatar-blue">R</span>
+
+            <span class="demo-details">
+              <strong>Rahul</strong>
+              <small>Personal account</small>
+            </span>
+
+            <span class="demo-arrow">↗</span>
+          </button>
+
+
+          <button
+            class="demo-user"
+            type="button"
+            data-email="priya@example.com"
+            data-password="priya123"
+          >
+            <span class="demo-avatar avatar-sage">P</span>
+
+            <span class="demo-details">
+              <strong>Priya</strong>
+              <small>Personal account</small>
+            </span>
+
+            <span class="demo-arrow">↗</span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="auth-divider">
+        <span></span>
+        <small>OR</small>
+        <span></span>
+      </div>
+
+
+      <p class="create-account">
+        New to Finora?
+        <a href="register.html">
+          Create your account <span>↗</span>
+        </a>
+      </p>
+
+
+      <div class="login-footer">
+        <span>🔒 Demo environment</span>
+        <span>•</span>
+        <span>No real money involved</span>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<script src="js/app.js"></script>
+
+
+<script>
+  /* Password visibility */
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("password");
+
+  if (togglePassword && passwordInput) {
+    togglePassword.addEventListener("click", () => {
+
+      const isPassword = passwordInput.type === "password";
+
+      passwordInput.type = isPassword ? "text" : "password";
+
+      togglePassword.textContent = isPassword ? "◉" : "◌";
+
+    });
+  }
+
+
+  /* Demo login buttons */
+  document.querySelectorAll(".demo-user").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document.getElementById("email").value =
+        button.dataset.email;
+
+      document.getElementById("password").value =
+        button.dataset.password;
+
+      document.getElementById("email").focus();
+
+    });
+
+  });
+</script>
+
+</body>
+</html>
