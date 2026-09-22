@@ -3,65 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Banking & Personal Finance Management System</title>
+    <title>FinBank - Login</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <div class="auth-container">
+<div class="auth-container">
 
-        <div class="auth-box">
+    <div class="auth-box">
 
-            <div class="logo">
-                <div class="logo-icon">₹</div>
-                <h1>FinBank</h1>
+        <div class="logo">
+            <div class="logo-icon">₹</div>
+            <h1>FinBank</h1>
+        </div>
+
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Login to manage your personal finances</p>
+
+        <form>
+
+            <div class="input-group">
+                <label>Email Address</label>
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                >
             </div>
 
-            <h2>Welcome Back</h2>
+            <div class="input-group">
+                <label>Password</label>
+                <input
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                >
+            </div>
 
-            <p class="subtitle">
-                Login to manage your personal finances
-            </p>
+            <div class="options">
+                <label>
+                    <input type="checkbox">
+                    Remember me
+                </label>
 
-            <form id="loginForm">
+                <a href="#">Forgot Password?</a>
+            </div>
 
-                <div class="input-group">
-                    <label>Email Address</label>
-                    <input
-                        type="email"
-                        id="loginEmail"
-                        placeholder="Enter your email"
-                        required
-                    >
-                </div>
+            <a href="dashboard.html" class="login-btn">
+                Login →
+            </a>
 
-                <div class="input-group">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        id="loginPassword"
-                        placeholder="Enter your password"
-                        required
-                    >
-                </div>
+        </form>
 
-                <button type="submit" class="primary-btn">
-                    Login
-                </button>
-
-            </form>
-
-            <p class="bottom-text">
-                Don't have an account?
-                <a href="register.html">Create Account</a>
-            </p>
-
-        </div>
+        <p class="bottom-text">
+            Don't have an account?
+            <a href="register.html">Create Account</a>
+        </p>
 
     </div>
 
-    <script src="js/script.js"></script>
+</div>
 
 </body>
 </html>
