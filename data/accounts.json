@@ -1,0 +1,82 @@
+[
+  {
+    "id": "a101",
+    "userId": "u001",
+    "type": "Savings",
+    "number": "4582",
+    "balance": 52450,
+    "status": "Active"
+  },
+  {
+    "id": "a102",
+    "userId": "u001",
+    "type": "Checking",
+    "number": "7814",
+    "balance": 31800,
+    "status": "Active"
+  },
+  {
+    "id": "a103",
+    "userId": "u001",
+    "type": "Credit Card",
+    "number": "2241",
+    "balance": -6200,
+    "status": "Active"
+  },
+  {
+    "id": "a104",
+    "userId": "u001",
+    "type": "Fixed Deposit",
+    "number": "9016",
+    "balance": 40000,
+    "status": "Active"
+  },
+  {
+    "id": "a201",
+    "userId": "u002",
+    "type": "Savings",
+    "number": "6312",
+    "balance": 68900,
+    "status": "Active"
+  },
+  {
+    "id": "a202",
+    "userId": "u002",
+    "type": "Checking",
+    "number": "1428",
+    "balance": 22400,
+    "status": "Active"
+  },
+  {
+    "id": "a203",
+    "userId": "u002",
+    "type": "Credit Card",
+    "number": "8830",
+    "balance": -4200,
+    "status": "Active"
+  },
+  {
+    "id": "a301",
+    "userId": "u003",
+    "type": "Savings",
+    "number": "5521",
+    "balance": 43150,
+    "status": "Active"
+  },
+  {
+    "id": "a302",
+    "userId": "u003",
+    "type": "Checking",
+    "number": "9107",
+    "balance": 27600,
+    "status": "Active"
+  },
+  {
+    "id": "a303",
+    "userId": "u003",
+    "type": "Fixed Deposit",
+    "number": "3154",
+    "balance": 55000,
+    "status": "Active"
+  }
+]

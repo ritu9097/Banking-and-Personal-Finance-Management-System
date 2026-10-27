@@ -1,0 +1,23 @@
+[
+  {
+    "id": "u001",
+    "name": "Riya Sharma",
+    "email": "riya@example.com",
+    "password": "riya123",
+    "phone": "9876543210"
+  },
+  {
+    "id": "u002",
+    "name": "Rahul Verma",
+    "email": "rahul@example.com",
+    "password": "rahul123",
+    "phone": "9812345678"
+  },
+  {
+    "id": "u003",
+    "name": "Priya Singh",
+    "email": "priya@example.com",
+    "password": "priya123",
+    "phone": "9765432100"
+  }
+]

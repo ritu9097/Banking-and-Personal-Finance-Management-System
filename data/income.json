@@ -1,0 +1,50 @@
+[
+  {
+    "id": "i1",
+    "userId": "u001",
+    "source": "Salary",
+    "description": "Monthly salary",
+    "amount": 42000,
+    "date": "2026-09-01"
+  },
+  {
+    "id": "i2",
+    "userId": "u001",
+    "source": "Freelance",
+    "description": "Website project",
+    "amount": 8500,
+    "date": "2026-09-07"
+  },
+  {
+    "id": "i3",
+    "userId": "u002",
+    "source": "Salary",
+    "description": "Monthly salary",
+    "amount": 52000,
+    "date": "2026-09-01"
+  },
+  {
+    "id": "i4",
+    "userId": "u002",
+    "source": "Freelance",
+    "description": "Client work",
+    "amount": 12000,
+    "date": "2026-09-08"
+  },
+  {
+    "id": "i5",
+    "userId": "u003",
+    "source": "Salary",
+    "description": "Monthly salary",
+    "amount": 46000,
+    "date": "2026-09-01"
+  },
+  {
+    "id": "i6",
+    "userId": "u003",
+    "source": "Scholarship",
+    "description": "University scholarship",
+    "amount": 10000,
+    "date": "2026-09-08"
+  }
+]
