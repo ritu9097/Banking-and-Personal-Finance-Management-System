@@ -1238,11 +1238,160 @@ function renderTransactions(){
 }
 function renderCrud(kind,title){
  const c=$("#content"), isInc=kind==="income";const opts=isInc?["Salary","Freelance","Scholarship","Business","Other"]:["Food","Shopping","Transport","Bills","Entertainment","Education","Healthcare","Other"];
- function draw(){const rows=data(kind);c.innerHTML=`<div class="section-head"><h2>${title} records</h2><button class="btn primary small" onclick="addRecord()">＋ Add ${title.toLowerCase()}</button></div><div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>${isInc?"Source":"Category"}</th><th>Description</th><th>Date</th><th>Amount</th><th></th></tr></thead><tbody>${rows.map(x=>`<tr><td>${x[isInc?"source":"category"]}</td><td>${esc(x.description)}</td><td>${x.date}</td><td class="pos">${money(x.amount)}</td><td><button class="btn danger small" onclick="removeRecord('${x.id}')">Delete</button></td></tr>`).join("")||'<tr><td colspan="5" class="empty">No records yet.</td></tr>'}</tbody></table></div></div>`}
+ function draw(){const rows=data(kind);c.innerHTML=`<div class="section-head"><h2>${title} records</h2><button class="btn primary small" onclick="addRecord()">＋ Add ${title.toLowerCase()}</button></div><div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>${isInc?"Source":"Category"}</th><th>Description</th><th>Date</th><th>Amount</th><th></th></tr></thead><tbody>${rows.map(x=>`<tr><td>${x[isInc?"source":"category"]}</td><td>${esc(x.description)}</td><td>${x.date}</td><td class="pos">${money(x.amount)}</td><td>
+  <button class="btn secondary small"
+    onclick="editRecord('${x.id}')">Edit</button>
+
+  <button class="btn danger small"
+    onclick="removeRecord('${x.id}')">Delete</button>
+</td></tr>`).join("")||'<tr><td colspan="5" class="empty">No records yet.</td></tr>'}</tbody></table></div></div>`}
  window.addRecord=()=>modal(`Add ${title.toLowerCase()}`,`<form id="rf" class="form-grid"><label>${isInc?"Source":"Category"}<select id="cat" class="select">${opts.map(x=>`<option>${x}</option>`).join("")}</select></label><label>Amount<input id="amt" class="input" type="number" min="1" required></label><label>Description<input id="desc" class="input" required></label><label>Date<input id="date" class="input" type="date" value="${today()}" required></label><div class="full-col"><button class="btn primary full">Save</button></div></form>`,()=>$("#rf").onsubmit=e=>{e.preventDefault();let arr=get(kind);arr.push({id:uid(kind[0]),userId:user().id,[isInc?"source":"category"]:$("#cat").value,description:$("#desc").value,amount:Number($("#amt").value),date:$("#date").value});set(kind,arr);$("#modal").innerHTML="";toast(`${title} added`);draw()});
+window.editRecord = id => {
+  const record = get(kind).find(x => x.id === id);
+  if (!record) return;
+
+  modal(`Edit ${title.toLowerCase()}`, `
+    <form id="editForm" class="form-grid">
+      <label>
+        ${isInc ? "Source" : "Category"}
+        <select id="editCat" class="select">
+          ${opts.map(x =>
+            `<option ${x === (isInc ? record.source : record.category) ? "selected" : ""}>${x}</option>`
+          ).join("")}
+        </select>
+      </label>
+
+      <label>
+        Amount
+        <input id="editAmt" class="input" type="number"
+          min="0.01" step="0.01"
+          value="${record.amount}" required>
+      </label>
+
+      <label>
+        Description
+        <input id="editDesc" class="input"
+          value="${esc(record.description)}" required>
+      </label>
+
+      <label>
+        Date
+        <input id="editDate" class="input" type="date"
+          value="${record.date}" required>
+      </label>
+
+      <div class="full-col">
+        <button class="btn primary full">Save changes</button>
+      </div>
+    </form>
+  `, () => {
+    $("#editForm").onsubmit = e => {
+      e.preventDefault();
+
+      const records = get(kind);
+      const item = records.find(x => x.id === id);
+      if (!item) return;
+
+      item[isInc ? "source" : "category"] = $("#editCat").value;
+      item.amount = Number($("#editAmt").value);
+      item.description = $("#editDesc").value.trim();
+      item.date = $("#editDate").value;
+
+      set(kind, records);
+      $("#modal").innerHTML = "";
+      toast(`${title} updated`);
+      draw();
+    };
+  });
+};
  window.removeRecord=id=>{set(kind,get(kind).filter(x=>x.id!==id));toast(`${title} deleted`);draw()};draw();
 }
-function renderBudgets(){const c=$("#content"),b=data("budgets"),e=data("expenses");c.innerHTML=`<div class="section-head"><h2>Monthly budgets</h2><button class="btn primary small" onclick="addBudget()">＋ Add budget</button></div><div class="grid two">${b.map(x=>{let s=e.filter(y=>y.category===x.category).reduce((z,y)=>z+y.amount,0),p=Math.min(100,s/x.amount*100);return `<div class="card"><div class="budget-top"><b>${x.category}</b><b>${Math.round(p)}%</b></div><p class="muted">${money(s)} spent of ${money(x.amount)}</p><div class="progress"><span style="width:${p}%;${p>=100?"background:var(--red)":""}"></span></div><small class="muted">${p>=100?"Over budget":"Remaining "+money(x.amount-s)}</small></div>`}).join("")}</div>`;window.addBudget=()=>modal("Create budget",`<form id="bf" class="form-grid"><label>Category<select id="bc" class="select">${["Food","Shopping","Transport","Bills","Entertainment","Education","Healthcare","Other"].map(x=>`<option>${x}</option>`).join("")}</select></label><label>Amount<input id="ba" class="input" type="number" min="1" required></label><div class="full-col"><button class="btn primary full">Create</button></div></form>`,()=>$("#bf").onsubmit=e=>{e.preventDefault();let a=get("budgets");a.push({id:uid("b"),userId:user().id,category:$("#bc").value,amount:Number($("#ba").value)});set("budgets",a);$("#modal").innerHTML="";toast("Budget created");renderBudgets()})}
+function renderBudgets(){const c=$("#content"),b=data("budgets"),e=data("expenses");c.innerHTML=`<div class="section-head"><h2>Monthly budgets</h2><button class="btn primary small" onclick="addBudget()">＋ Add budget</button></div><div class="grid two">${b.map(x=>{let s=e.filter(y=>y.category===x.category).reduce((z,y)=>z+y.amount,0),p=Math.min(100,s/x.amount*100);return `
+  <div class="card">
+    <div class="budget-top">
+      <b>${esc(x.category)}</b>
+      <b>${Math.round(p)}%</b>
+    </div>
+
+    <p class="muted">
+      ${money(s)} spent of ${money(x.amount)}
+    </p>
+
+    <div class="progress">
+      <span style="width:${p}%;${p>=100?"background:var(--red)":""}"></span>
+    </div>
+
+    <small class="muted">
+      ${p>=100?"Over budget":"Remaining "+money(x.amount-s)}
+    </small>
+
+    <div class="actions" style="margin-top:15px">
+      <button class="btn secondary small"
+        onclick="editBudget('${x.id}')">Edit</button>
+
+      <button class="btn danger small"
+        onclick="deleteBudget('${x.id}')">Delete</button>
+    </div>
+  </div>
+`;}).join("")}</div>`;window.addBudget=()=>modal("Create budget",`<form id="bf" class="form-grid"><label>Category<select id="bc" class="select">${["Food","Shopping","Transport","Bills","Entertainment","Education","Healthcare","Other"].map(x=>`<option>${x}</option>`).join("")}</select></label><label>Amount<input id="ba" class="input" type="number" min="1" required></label><div class="full-col"><button class="btn primary full">Create</button></div></form>`,()=>$("#bf").onsubmit=e=>{e.preventDefault();let a=get("budgets");a.push({id:uid("b"),userId:user().id,category:$("#bc").value,amount:Number($("#ba").value)});set("budgets",a);$("#modal").innerHTML="";toast("Budget created");renderBudgets()})}
+window.editBudget = id => {
+  const budgets = get("budgets");
+  const budget = budgets.find(
+    x => x.id === id && x.userId === user().id
+  );
+
+  if (!budget) return;
+
+  modal("Edit budget", `
+    <form id="editBudgetForm" class="form-grid">
+      <label>
+        Category
+        <select id="editBudgetCategory" class="select">
+          ${["Food","Shopping","Transport","Bills","Entertainment","Education","Healthcare","Other"]
+            .map(category => `<option ${category === budget.category ? "selected" : ""}>${category}</option>`)
+            .join("")}
+        </select>
+      </label>
+
+      <label>
+        Amount
+        <input id="editBudgetAmount" class="input"
+          type="number" min="0.01" step="0.01"
+          value="${budget.amount}" required>
+      </label>
+
+      <div class="full-col">
+        <button class="btn primary full">Save changes</button>
+      </div>
+    </form>
+  `, () => {
+    $("#editBudgetForm").onsubmit = e => {
+      e.preventDefault();
+
+      budget.category = $("#editBudgetCategory").value;
+      budget.amount = Number($("#editBudgetAmount").value);
+
+      set("budgets", budgets);
+      $("#modal").innerHTML = "";
+      toast("Budget updated");
+      renderBudgets();
+    };
+  });
+};
+
+window.deleteBudget = id => {
+  const budgets = get("budgets");
+  const budget = budgets.find(
+    x => x.id === id && x.userId === user().id
+  );
+
+  if (!budget) return;
+  if (!confirm("Delete this budget?")) return;
+
+  set("budgets", budgets.filter(x => x.id !== id));
+  toast("Budget deleted");
+  renderBudgets();
+};
 function renderSavings(){const c=$("#content"),g=data("savings");c.innerHTML=`<div class="section-head"><h2>Your goals</h2><button class="btn primary small" onclick="addGoal()">＋ Add goal</button></div><div class="grid three">${g.map(x=>{let p=Math.min(100,x.current/x.target*100);return `<div class="card"><div class="budget-top"><b>${esc(x.name)}</b><b>${Math.round(p)}%</b></div><h2>${money(x.current)}</h2><p class="muted">Target ${money(x.target)}</p><div class="progress"><span style="width:${p}%"></span></div><p class="muted">Remaining ${money(Math.max(0,x.target-x.current))}</p><small class="muted">Target: ${x.date}</small></div>`}).join("")}</div>`;window.addGoal=()=>modal("Add savings goal",`<form id="gf" class="form-grid"><label>Goal name<input id="gn" class="input" required></label><label>Target amount<input id="gt" class="input" type="number" min="1" required></label><label>Current saved<input id="gc" class="input" type="number" min="0" required></label><label>Target date<input id="gd" class="input" type="date" required></label><div class="full-col"><button class="btn primary full">Create</button></div></form>`,()=>$("#gf").onsubmit=e=>{e.preventDefault();let a=get("savings");a.push({id:uid("s"),userId:user().id,name:$("#gn").value,target:Number($("#gt").value),current:Number($("#gc").value),date:$("#gd").value});set("savings",a);$("#modal").innerHTML="";toast("Goal created");renderSavings()})}
 function renderAnalytics(){const c=$("#content"),inc=data("income"),ex=data("expenses"),ti=inc.reduce((s,x)=>s+x.amount,0),te=ex.reduce((s,x)=>s+x.amount,0),cats={};ex.forEach(x=>cats[x.category]=(cats[x.category]||0)+x.amount);let max=Math.max(...Object.values(cats),1);c.innerHTML=`<div class="grid stats"><div class="card stat"><small>Income</small><h2 class="pos">${money(ti)}</h2></div><div class="card stat"><small>Expenses</small><h2 class="neg">${money(te)}</h2></div><div class="card stat"><small>Net cash flow</small><h2>${money(ti-te)}</h2></div><div class="card stat"><small>Savings rate</small><h2>${ti?Math.round((ti-te)/ti*100):0}%</h2></div></div><div class="section-head"><h2>Financial analytics</h2></div><div class="grid two"><div class="card"><h2>Expense categories</h2>${Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="budget-item"><div class="budget-top"><b>${k}</b><span>${money(v)}</span></div><div class="progress"><span style="width:${v/max*100}%"></span></div></div>`).join("")}</div><div class="card"><h2>Income vs Expenses</h2><div class="mini-chart"><div class="bar-col"><div class="bar" style="height:${Math.max(8,ti/Math.max(ti,te)*100)}%"></div><small>Income</small></div><div class="bar-col"><div class="bar" style="height:${Math.max(8,te/Math.max(ti,te)*100)}%"></div><small>Expense</small></div></div></div></div><div class="card" style="margin-top:18px"><h2>Spending activity</h2><div class="mini-chart">${[35,52,41,78,60,48,69].map((v,i)=>`<div class="bar-col"><div class="bar" style="height:${v}%"></div><small>${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]}</small></div>`).join("")}</div></div>`}
 function renderProfile(){const c=$("#content"),u=user();c.innerHTML=`<div class="grid two"><div class="card"><div class="profile"><div class="profile-avatar">${esc(u.name.split(" ").map(x=>x[0]).join(""))}</div><div><h2 style="margin:0">${esc(u.name)}</h2><p class="muted">${esc(u.email)}</p></div></div><div class="section-head"><h2>Profile information</h2><button class="btn primary small" onclick="editProfile()">Edit</button></div><p><span class="muted">Phone</span><br><b>${esc(u.phone||"Not provided")}</b></p><p><span class="muted">User ID</span><br><b>${u.id}</b></p></div><div class="card"><h2>About this project</h2><p class="muted" style="line-height:1.7">This is a frontend-only college project. All data is fictional and stored in your browser LocalStorage. No real banking or payment services are connected.</p><button class="btn danger" onclick="localStorage.removeItem('finora_currentUser');location.href='login.html'">Logout</button></div></div>`;window.editProfile=()=>modal("Edit profile",`<form id="pf" class="form"><label>Name<input id="pn" class="input" value="${esc(u.name)}" required></label><label>Phone<input id="pp" class="input" value="${esc(u.phone||"")}" required></label><button class="btn primary full">Save changes</button></form>`,()=>$("#pf").onsubmit=e=>{e.preventDefault();let a=get("users"),x=a.find(z=>z.id===u.id);x.name=$("#pn").value;x.phone=$("#pp").value;set("users",a);$("#modal").innerHTML="";toast("Profile updated");setTimeout(()=>location.reload(),400)})}
