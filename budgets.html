@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#5146e5">
+<title>Budgets — Finora</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="budgets">
+<div class="app">
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><span class="logo">F</span><span>Finora</span></div>
+  <div class="side-title">MAIN MENU</div>
+
+  <nav aria-label="Main navigation">
+    <a data-page-link="dashboard" href="dashboard.html">⌂ <span>Dashboard</span></a>
+    <a data-page-link="accounts" href="accounts.html">▣ <span>Accounts</span></a>
+    <a data-page-link="transactions" href="transactions.html">↔ <span>Transactions</span></a>
+    <a data-page-link="income" href="income.html">↗ <span>Income</span></a>
+    <a data-page-link="expenses" href="expenses.html">↘ <span>Expenses</span></a>
+    <a data-page-link="budgets" href="budgets.html">▤ <span>Budgets</span></a>
+    <a data-page-link="savings" href="savings.html">◎ <span>Savings Goals</span></a>
+    <a data-page-link="analytics" href="analytics.html">◔ <span>Analytics</span></a>
+    <a data-page-link="profile" href="profile.html">⚙ <span>Profile</span></a>
+  </nav>
+
+  <button class="logout" id="logout" type="button">↪ <span>Logout</span></button>
+</aside>
+
+<div class="overlay" id="overlay"></div>
+
+<main class="main">
+  <header class="topbar">
+    <button class="menu" id="menu" type="button" aria-label="Open menu">☰</button>
+
+    <div>
+      <div class="eyebrow">FINORA FINANCE</div>
+      <h1>Budgets</h1>
+      <p class="muted">Stay in control of where your money goes.</p>
+    </div>
+
+    <div class="top-right">
+      <button class="icon-btn" type="button" aria-label="Search">⌕</button>
+      <button class="icon-btn" type="button" aria-label="Notifications">♧</button>
+      <a class="avatar" id="avatar" href="profile.html" aria-label="Open profile">U</a>
+    </div>
+  </header>
+
+  <section id="content" class="content"></section>
+</main>
+</div>
+
+<div id="modal"></div>
+<div id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
