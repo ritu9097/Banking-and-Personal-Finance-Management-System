@@ -4341,3 +4341,491 @@ body,
   }
 
 }
+
+/* =====================================================
+   FINORA — MODERN MONOCHROME DESIGN OVERRIDES
+   Add this block at the END of css/style.css
+   ===================================================== */
+
+:root {
+  --p: #292929;
+  --p2: #111111;
+  --p3: #777777;
+
+  --navy: #171717;
+  --slate: #303030;
+  --steel: #666666;
+  --sage: #777777;
+  --beige: #D8D5CF;
+  --ivory: #F7F6F3;
+
+  --bg: #F5F5F3;
+  --card: #FFFFFF;
+  --text: #222222;
+  --muted: #777777;
+  --line: rgba(25, 25, 25, 0.10);
+
+  --green: #505050;
+  --red: #B05252;
+  --yellow: #8A7A5C;
+  --blue: #555555;
+
+  --shadow: 0 5px 22px rgba(0, 0, 0, 0.045);
+  --shadow-hover: 0 14px 35px rgba(0, 0, 0, 0.09);
+
+  --r: 17px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: #DADADA;
+  color: #111111;
+}
+
+/* Sidebar */
+
+.sidebar {
+  background: #202020;
+  border-right: 1px solid #333333;
+  box-shadow: none;
+}
+
+.sidebar .brand {
+  color: #FFFFFF;
+}
+
+.sidebar .logo {
+  background: #FFFFFF;
+  color: #202020;
+  box-shadow: none;
+}
+
+.side-title {
+  color: #929292;
+}
+
+.sidebar nav a,
+.sidebar .logout {
+  color: #C0C0C0;
+}
+
+.sidebar nav a:hover,
+.sidebar .logout:hover {
+  background: #333333;
+  color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+.sidebar nav a.active {
+  background: #3A3A3A;
+  color: #FFFFFF;
+  box-shadow: inset 3px 0 0 #FFFFFF;
+}
+
+/* Top bar */
+
+.topbar {
+  background: rgba(245, 245, 243, 0.92);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar h1,
+.eyebrow {
+  color: var(--text);
+}
+
+.icon-btn,
+.avatar,
+.menu {
+  background: #FFFFFF;
+  color: #333333;
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.avatar {
+  background: #292929;
+  color: #FFFFFF;
+  border-color: #292929;
+}
+
+/* Cards */
+
+.card {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+
+.card:hover {
+  border-color: #C8C8C8;
+  box-shadow: var(--shadow-hover);
+}
+
+.stat .stat-icon {
+  background: #F0F0EE;
+  color: #252525;
+  box-shadow: none;
+}
+
+.stat:after {
+  background: rgba(0, 0, 0, 0.035);
+}
+
+.stat h2 {
+  color: #222222;
+}
+
+.stat .pos {
+  color: #444444;
+}
+
+.stat .neg {
+  color: #B05252;
+}
+
+/* Hero banner */
+
+.hero {
+  background: linear-gradient(125deg, #191919, #383838);
+  color: #FFFFFF;
+  border: 1px solid #303030;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.10);
+}
+
+.hero h2,
+.hero .eyebrow {
+  color: #FFFFFF;
+}
+
+.hero p,
+.hero .muted {
+  color: #C6C6C6;
+}
+
+/* Buttons */
+
+.btn.primary {
+  background: #242424;
+  color: #FFFFFF;
+  box-shadow: none;
+}
+
+.btn.primary:hover {
+  background: #444444;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
+}
+
+.btn.secondary {
+  background: #F0F0EE;
+  color: #292929;
+  border: 1px solid #E3E3E0;
+}
+
+.btn.secondary:hover {
+  background: #E4E4E1;
+}
+
+.btn.danger {
+  background: #FFF0F0;
+  color: #A33F3F;
+}
+
+/* Account cards */
+
+.bank-card,
+.bank-card:nth-child(2n),
+.bank-card:nth-child(3n) {
+  background: linear-gradient(135deg, #202020, #454545) !important;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.bank-card h2 {
+  color: #FFFFFF;
+}
+
+.bank-card .muted {
+  color: #D0D0D0;
+}
+
+/* Tables */
+
+.table th {
+  color: #777777;
+}
+
+.table tbody tr:hover {
+  background: #F5F5F3;
+  transform: none;
+}
+
+.table tbody tr:hover td:first-child b {
+  color: #222222;
+}
+
+.pill {
+  background: #EEEEEC;
+  color: #444444;
+}
+
+/* Quick action cards */
+
+.quick {
+  background: #FFFFFF;
+  border-color: var(--line);
+}
+
+.quick:hover {
+  border-color: #BDBDBD;
+  box-shadow: var(--shadow-hover);
+}
+
+.quick b {
+  background: #292929;
+  color: #FFFFFF;
+}
+
+/* Progress and charts */
+
+.progress {
+  background: #EAEAE7;
+}
+
+.progress span {
+  background: linear-gradient(90deg, #333333, #888888);
+}
+
+.bar {
+  background: linear-gradient(180deg, #777777, #292929);
+}
+
+.cash-bar.income {
+  background: #555555;
+}
+
+.cash-bar.expense {
+  background: #C5C5C1;
+}
+
+.spending-fill {
+  background: linear-gradient(90deg, #303030, #929292);
+}
+
+/* Forms */
+
+.input,
+.select,
+.input-wrap input {
+  background: #FFFFFF;
+  color: #222222;
+  border-color: #DEDEDA;
+}
+
+.input:focus,
+.select:focus,
+.input-wrap input:focus {
+  border-color: #777777;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+  outline: none;
+}
+
+label {
+  color: #454545;
+}
+
+.modal {
+  background: #FFFFFF;
+}
+
+/* Authentication and landing pages */
+
+.auth,
+.auth-page {
+  background: #F5F5F3;
+}
+
+.auth-shell {
+  background: #FFFFFF;
+}
+
+.auth-visual,
+.auth-showcase {
+  background: linear-gradient(145deg, #191919, #414141);
+}
+
+.auth-visual p,
+.showcase-copy p {
+  color: #D1D1D1;
+}
+
+.auth-logo {
+  background: #FFFFFF;
+  color: #222222;
+}
+
+.auth-foot a,
+.auth-foot a:hover {
+  color: #292929;
+}
+
+.demo {
+  background: #F5F5F3;
+  border-color: #DEDEDA;
+}
+
+.landing {
+  background: #F5F5F3;
+}
+
+/* Profile */
+
+.profile-avatar {
+  background: #EAEAE7;
+  color: #292929;
+}
+
+/* Theme toggle */
+
+.theme-toggle {
+  background: #FFFFFF;
+  color: #252525;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* Dark mode */
+
+html[data-theme="dark"] {
+  --bg: #141414;
+  --card: #202020;
+  --text: #F2F2F0;
+  --muted: #A4A4A4;
+  --line: rgba(255, 255, 255, 0.10);
+
+  --shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+  --shadow-hover: 0 14px 35px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] body {
+  background: #141414;
+  color: #F2F2F0;
+}
+
+html[data-theme="dark"] .topbar {
+  background: rgba(20, 20, 20, 0.94);
+  border-bottom-color: var(--line);
+}
+
+html[data-theme="dark"] .topbar h1,
+html[data-theme="dark"] .section-head h2,
+html[data-theme="dark"] .stat h2 {
+  color: #F2F2F0;
+}
+
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .quick {
+  background: #202020;
+  color: #F2F2F0;
+  border-color: var(--line);
+}
+
+html[data-theme="dark"] .stat .stat-icon,
+html[data-theme="dark"] .btn.secondary,
+html[data-theme="dark"] .pill {
+  background: #303030;
+  color: #E8E8E8;
+  border-color: #3A3A3A;
+}
+
+html[data-theme="dark"] .input,
+html[data-theme="dark"] .select,
+html[data-theme="dark"] .input-wrap input {
+  background: #292929;
+  color: #F2F2F0;
+  border-color: #444444;
+}
+
+html[data-theme="dark"] .table th,
+html[data-theme="dark"] .table td {
+  border-bottom-color: var(--line);
+}
+
+html[data-theme="dark"] .table tbody tr:hover {
+  background: #2A2A2A;
+}
+
+html[data-theme="dark"] .modal {
+  background: #202020;
+  color: #F2F2F0;
+}
+
+html[data-theme="dark"] .auth,
+html[data-theme="dark"] .auth-page,
+html[data-theme="dark"] .landing {
+  background: #141414;
+}
+
+html[data-theme="dark"] .auth-shell,
+html[data-theme="dark"] .auth-card {
+  background: #202020;
+  color: #F2F2F0;
+}
+
+html[data-theme="dark"] .auth-card h2,
+html[data-theme="dark"] .auth-card label {
+  color: #F2F2F0;
+}
+
+/* Responsive polish */
+
+@media (max-width: 760px) {
+  .section-head {
+    gap: 12px;
+  }
+
+  .actions,
+  .filters {
+    width: 100%;
+  }
+
+  .filters .input,
+  .filters .select {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .table-wrap {
+    max-width: 100%;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

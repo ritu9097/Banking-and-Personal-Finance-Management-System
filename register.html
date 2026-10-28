@@ -1,703 +1,755 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <meta name="theme-color" content="#0D1B2A">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f3">
   <title>Create Account — Finora</title>
-
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .auth-page {
+      --bg: #f5f5f3;
+      --ink: #202020;
+      --muted: #777772;
+      --line: #e7e6e2;
+      --soft: #f0efec;
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+
+    .auth-page * { box-sizing: border-box; }
+
+    .auth-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(420px, .94fr);
+      gap: 16px;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    .auth-showcase {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 720px;
+      padding: clamp(30px, 5vw, 72px);
+      overflow: hidden;
+      border-radius: 24px;
+      background: #e9e8e4;
+      isolation: isolate;
+    }
+
+    .auth-showcase::before,
+    .auth-showcase::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border: 1px solid rgba(32,32,32,.09);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .auth-showcase::before {
+      width: 540px;
+      height: 540px;
+      right: -180px;
+      top: -170px;
+    }
+
+    .auth-showcase::after {
+      width: 400px;
+      height: 400px;
+      right: -110px;
+      top: -100px;
+    }
+
+    .noise, .glow { display: none; }
+
+    .showcase-content {
+      position: relative;
+      width: 100%;
+      max-width: 590px;
+      margin: auto;
+    }
+
+    .auth-brand, .mobile-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 21px;
+      font-weight: 750;
+      letter-spacing: -.8px;
+    }
+
+    .auth-logo {
+      display: grid;
+      width: 39px;
+      height: 39px;
+      place-items: center;
+      border-radius: 12px;
+      background: #202020;
+      color: #fff;
+      font-size: 23px;
+      font-weight: 750;
+    }
+
+    .showcase-copy { margin-top: clamp(48px, 7vh, 76px); }
+
+    .mini-pill, .welcome-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 12px;
+      border: 1px solid rgba(32,32,32,.13);
+      border-radius: 100px;
+      background: rgba(255,255,255,.42);
+      color: #555550;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: 1.3px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #343434;
+    }
+
+    .showcase-copy h1 {
+      max-width: 500px;
+      margin: 25px 0 17px;
+      font-size: clamp(43px, 5vw, 67px);
+      font-weight: 750;
+      line-height: 1.04;
+      letter-spacing: -3.6px;
+    }
+
+    .showcase-copy h1 span {
+      display: block;
+      color: #777772;
+      font-weight: 450;
+    }
+
+    .showcase-copy p {
+      max-width: 410px;
+      color: #686863;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .float-card {
+      position: relative;
+      border: 1px solid rgba(32,32,32,.09);
+      border-radius: 17px;
+      background: rgba(255,255,255,.8);
+      box-shadow: 0 18px 50px rgba(32,32,32,.06);
+      color: #252525;
+      backdrop-filter: blur(12px);
+      animation: registerRise .65s ease both;
+    }
+
+    .growth-card {
+      max-width: 335px;
+      margin: 34px 0 0 auto;
+      padding: 20px;
+    }
+
+    .growth-header, .growth-value, .goal-top, .goal-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .growth-header {
+      color: #777772;
+      font-size: 11px;
+    }
+
+    .growth-value { margin-top: 13px; }
+    .growth-value strong { font-size: 30px; letter-spacing: -1.2px; }
+    .growth-value span { color: #50504b; font-size: 12px; font-weight: 750; }
+
+    .growth-bars {
+      display: flex;
+      align-items: end;
+      gap: 8px;
+      height: 58px;
+      margin-top: 20px;
+    }
+
+    .growth-bars span {
+      flex: 1;
+      border-radius: 4px 4px 2px 2px;
+      background: #d6d5cf;
+    }
+
+    .growth-bars span:nth-last-child(-n+3) { background: #555550; }
+
+    .habit-card {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      width: fit-content;
+      margin: -24px 0 0;
+      padding: 14px 17px;
+      animation-delay: .1s;
+    }
+
+    .habit-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 13px;
+      background: #e9e8e3;
+      font-size: 20px;
+    }
+
+    .habit-content { display: grid; gap: 4px; }
+    .habit-content small, .goal-top small, .goal-bottom small { color: #777772; font-size: 11px; }
+    .habit-content strong { font-size: 13px; }
+    .habit-content > span { color: #777772; font-size: 11px; }
+
+    .goal-card {
+      width: 235px;
+      margin: 13px 0 0 auto;
+      padding: 16px;
+      animation-delay: .2s;
+    }
+
+    .goal-top { justify-content: flex-start; }
+    .goal-top > span { font-size: 19px; }
+    .goal-top small { letter-spacing: 1.1px; }
+    .goal-card > strong { display: block; margin-top: 13px; font-size: 24px; }
+
+    .goal-line {
+      height: 5px;
+      margin: 12px 0 9px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #e6e5df;
+    }
+
+    .goal-line span {
+      display: block;
+      width: 65%;
+      height: 100%;
+      border-radius: inherit;
+      background: #454540;
+    }
+
+    .goal-bottom { gap: 10px; }
+
+    .showcase-bottom {
+      display: flex;
+      gap: 22px;
+      margin-top: 30px;
+      color: #777772;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: 2px;
+    }
+
+    /* Registration form */
+    .auth-form-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(25px, 3.6vw, 52px);
+      border: 1px solid #ecebe7;
+      border-radius: 24px;
+      background: #fff;
+    }
+
+    .auth-form-inner { width: 100%; max-width: 425px; }
+    .mobile-brand { display: none; }
+
+    .login-heading { margin-bottom: 25px; }
+
+    .welcome-tag {
+      padding: 8px 12px;
+      border-color: #eeede8;
+      background: #f7f6f3;
+      font-size: 11px;
+      letter-spacing: .2px;
+      text-transform: none;
+    }
+
+    .welcome-tag span { font-size: 15px; }
+
+    .login-heading h2 {
+      margin: 17px 0 9px;
+      font-size: clamp(32px, 3vw, 42px);
+      font-weight: 750;
+      line-height: 1.12;
+      letter-spacing: -2px;
+    }
+
+    .login-heading h2 span { color: #898983; }
+    .login-heading p { margin: 0; color: #777772; font-size: 13px; line-height: 1.7; }
+
+    .modern-login-form { display: grid; gap: 15px; }
+    .input-group { display: block; }
+
+    .input-label {
+      display: block;
+      margin-bottom: 7px;
+      color: #343430;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      min-height: 48px;
+      gap: 11px;
+      padding: 0 13px;
+      border: 1px solid #e5e4df;
+      border-radius: 11px;
+      background: #fff;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .input-wrap:focus-within {
+      border-color: #666660;
+      box-shadow: 0 0 0 4px rgba(32,32,32,.055);
+    }
+
+    .input-icon { color: #777772; font-size: 16px; }
+
+    .input-wrap input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #202020;
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .input-wrap input::placeholder { color: #aaa9a3; }
+
+    .password-toggle {
+      flex-shrink: 0;
+      padding: 5px;
+      border: 0;
+      background: transparent;
+      color: #777772;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .password-toggle:hover { color: #202020; }
+
+    .password-strength {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .strength-bars {
+      display: flex;
+      flex: 1;
+      gap: 4px;
+    }
+
+    .strength-bars span {
+      height: 4px;
+      flex: 1;
+      border-radius: 10px;
+      background: #e8e7e2;
+      transition: background .2s;
+    }
+
+    .strength-bars span.active { background: #454540; }
+
+    #strengthText {
+      min-width: 110px;
+      color: #898880;
+      text-align: right;
+      font-size: 10px;
+    }
+
+    .login-error {
+      color: #a33c3c;
+      font-size: 12px;
+    }
+
+    .login-error:empty { display: none; }
+
+    .login-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 51px;
+      padding: 0 17px;
+      border: 1px solid #202020;
+      border-radius: 11px;
+      background: #202020;
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .2s, background .2s, box-shadow .2s;
+    }
+
+    .login-button:hover {
+      transform: translateY(-2px);
+      background: #383834;
+      box-shadow: 0 9px 22px rgba(0,0,0,.12);
+    }
+
+    .button-arrow { font-size: 18px; }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0 16px;
+      color: #96958e;
+    }
+
+    .auth-divider span { flex: 1; height: 1px; background: #eeede9; }
+    .auth-divider small { font-size: 10px; letter-spacing: 1px; }
+
+    .create-account {
+      margin: 0;
+      color: #777772;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .create-account a {
+      color: #252525;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .create-account a:hover { text-decoration: underline; }
+
+    .create-account a span { margin-left: 3px; }
+
+    .login-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 23px;
+      color: #96958e;
+      font-size: 10px;
+    }
+
+    @keyframes registerRise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 1500px) {
+      .auth-wrap { max-width: 1800px; margin: auto; }
+    }
+
+    @media (max-width: 1050px) {
+      .auth-wrap { grid-template-columns: minmax(0, .9fr) minmax(390px, 1.1fr); }
+      .auth-showcase { padding: 32px; }
+      .showcase-copy h1 { font-size: 48px; letter-spacing: -2.5px; }
+      .auth-form-area { padding: 28px; }
+    }
+
+    @media (max-width: 780px) {
+      .auth-wrap { display: block; padding: 0; }
+      .auth-showcase { display: none; }
+      .auth-form-area {
+        min-height: 100vh;
+        padding: 28px 23px;
+        border: 0;
+        border-radius: 0;
+      }
+      .auth-form-inner { max-width: 440px; }
+      .mobile-brand { display: flex; margin-bottom: 30px; }
+      .login-heading { margin-bottom: 23px; }
+      .login-heading h2 { font-size: 36px; }
+    }
+
+    @media (max-width: 420px) {
+      .auth-form-area { padding: 23px 17px; }
+      .mobile-brand { margin-bottom: 25px; }
+      .login-heading h2 { font-size: 32px; }
+      .modern-login-form { gap: 13px; }
+      #strengthText { min-width: 95px; }
+      .login-footer { gap: 6px; font-size: 9px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .auth-page *, .auth-page *::before, .auth-page *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
-
 <body class="auth-page register-page">
+  <div class="auth-wrap">
 
-<div class="auth-wrap">
-
-
-  <!-- =====================================================
-       LEFT VISUAL PANEL
-       ===================================================== -->
-
-  <section class="auth-showcase register-showcase">
-
-    <div class="noise"></div>
-
-    <div class="glow glow-one"></div>
-    <div class="glow glow-two"></div>
-    <div class="glow glow-three"></div>
-
-
-    <div class="showcase-content">
-
-
-      <!-- BRAND -->
-
-      <div class="auth-brand">
-
-        <span class="auth-logo">F</span>
-
-        <span>Finora</span>
-
-      </div>
-
-
-      <!-- MAIN MESSAGE -->
-
-      <div class="showcase-copy register-copy">
-
-        <div class="mini-pill">
-
-          <span class="pulse-dot"></span>
-
-          YOUR MONEY ERA STARTS HERE
-
+    <section class="auth-showcase register-showcase" aria-label="Finora introduction">
+      <div class="showcase-content">
+        <div class="auth-brand">
+          <span class="auth-logo">F</span>
+          <span>Finora</span>
         </div>
 
-
-        <h1>
-
-          Build your
-          <span>money era.</span>
-
-        </h1>
-
-
-        <p>
-
-          One place to track your spending,
-          build better habits and actually
-          know where your money goes.
-
-        </p>
-
-      </div>
-
-
-
-      <!-- =================================================
-           FLOATING CARD 1
-           ================================================= -->
-
-      <div class="float-card growth-card">
-
-        <div class="growth-header">
-
-          <span>Your progress</span>
-
-          <span>2026</span>
-
-        </div>
-
-
-        <div class="growth-value">
-
-          <strong>₹42,680</strong>
-
-          <span>↗ 18.4%</span>
-
-        </div>
-
-
-        <div class="growth-bars">
-
-          <span style="height:35%"></span>
-          <span style="height:48%"></span>
-          <span style="height:42%"></span>
-          <span style="height:65%"></span>
-          <span style="height:58%"></span>
-          <span style="height:78%"></span>
-          <span style="height:92%"></span>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =================================================
-           FLOATING CARD 2
-           ================================================= -->
-
-      <div class="float-card habit-card">
-
-        <div class="habit-icon">
-
-          ✓
-
-        </div>
-
-
-        <div class="habit-content">
-
-          <small>Money habit</small>
-
-          <strong>Budget on track</strong>
-
-          <span>You're doing great ✦</span>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =================================================
-           FLOATING CARD 3
-           ================================================= -->
-
-      <div class="float-card goal-card">
-
-        <div class="goal-top">
-
-          <span>◎</span>
-
-          <small>SAVINGS GOAL</small>
-
-        </div>
-
-
-        <strong>₹32,400</strong>
-
-        <div class="goal-line">
-
-          <span></span>
-
-        </div>
-
-
-        <div class="goal-bottom">
-
-          <small>Dream trip</small>
-
-          <small>65%</small>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- BOTTOM -->
-
-      <div class="showcase-bottom">
-
-        <span>TRACK</span>
-        <span>PLAN</span>
-        <span>GROW</span>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =====================================================
-       RIGHT REGISTER FORM
-       ===================================================== -->
-
-  <section class="auth-form-area">
-
-
-    <div class="auth-form-inner">
-
-
-      <!-- MOBILE BRAND -->
-
-      <div class="mobile-brand">
-
-        <span class="auth-logo">F</span>
-
-        <strong>Finora</strong>
-
-      </div>
-
-
-
-      <!-- HEADING -->
-
-      <div class="login-heading register-heading">
-
-
-        <div class="welcome-tag">
-
-          <span>✦</span>
-
-          New here?
-
-        </div>
-
-
-        <h2>
-
-          Create your
-          <span>money space.</span>
-
-        </h2>
-
-
-        <p>
-
-          Set up your demo account in less than a minute.
-
-        </p>
-
-
-      </div>
-
-
-
-      <!-- =================================================
-           FORM
-           ================================================= -->
-
-      <form id="register" class="modern-login-form">
-
-
-        <!-- NAME -->
-
-        <label class="input-group">
-
-          <span class="input-label">
-
-            Full name
-
-          </span>
-
-
-          <div class="input-wrap">
-
-            <span class="input-icon">
-
-              ✦
-
-            </span>
-
-
-            <input
-              id="name"
-              type="text"
-              required
-              autocomplete="name"
-              placeholder="Your full name"
-            >
-
+        <div class="showcase-copy register-copy">
+          <div class="mini-pill">
+            <span class="pulse-dot"></span>
+            YOUR MONEY ERA STARTS HERE
           </div>
 
-        </label>
+          <h1>Build your<span>money era.</span></h1>
 
+          <p>
+            One place to track your spending, build better habits,
+            and understand where your money goes. Start with a clearer
+            view of your finances.
+          </p>
+        </div>
 
-
-        <!-- EMAIL -->
-
-        <label class="input-group">
-
-          <span class="input-label">
-
-            Email address
-
-          </span>
-
-
-          <div class="input-wrap">
-
-            <span class="input-icon">
-
-              @
-
-            </span>
-
-
-            <input
-              id="email"
-              type="email"
-              required
-              autocomplete="email"
-              placeholder="you@example.com"
-            >
-
+        <div class="float-card growth-card">
+          <div class="growth-header">
+            <span>Your progress</span>
+            <span>2026</span>
           </div>
-
-        </label>
-
-
-
-        <!-- PHONE -->
-
-        <label class="input-group">
-
-          <span class="input-label">
-
-            Phone number
-
-          </span>
-
-
-          <div class="input-wrap">
-
-            <span class="input-icon">
-
-              ☎
-
-            </span>
-
-
-            <input
-              id="phone"
-              type="tel"
-              required
-              autocomplete="tel"
-              placeholder="+91 98765 43210"
-            >
-
+          <div class="growth-value">
+            <strong>₹42,680</strong>
+            <span>↗ 18.4%</span>
           </div>
-
-        </label>
-
-
-
-        <!-- PASSWORD -->
-
-        <label class="input-group">
-
-          <span class="input-label">
-
-            Password
-
-          </span>
-
-
-          <div class="input-wrap">
-
-            <span class="input-icon">
-
-              ⌑
-
-            </span>
-
-
-            <input
-              id="password"
-              type="password"
-              minlength="6"
-              required
-              autocomplete="new-password"
-              placeholder="Create a password"
-            >
-
-
-            <button
-              class="password-toggle"
-              type="button"
-              id="toggleRegisterPassword"
-              aria-label="Show password"
-            >
-
-              ◉
-
-            </button>
-
+          <div class="growth-bars" aria-label="Illustrative progress chart">
+            <span style="height:35%"></span>
+            <span style="height:48%"></span>
+            <span style="height:42%"></span>
+            <span style="height:65%"></span>
+            <span style="height:58%"></span>
+            <span style="height:78%"></span>
+            <span style="height:92%"></span>
           </div>
+        </div>
 
+        <div class="float-card habit-card">
+          <div class="habit-icon">✓</div>
+          <div class="habit-content">
+            <small>Money habit</small>
+            <strong>Budget on track</strong>
+            <span>Small steps, clearer goals.</span>
+          </div>
+        </div>
 
-          <!-- PASSWORD STRENGTH -->
+        <div class="float-card goal-card">
+          <div class="goal-top">
+            <span>◎</span>
+            <small>SAVINGS GOAL</small>
+          </div>
+          <strong>₹32,400</strong>
+          <div class="goal-line"><span></span></div>
+          <div class="goal-bottom">
+            <small>Dream trip</small>
+            <small>65%</small>
+          </div>
+        </div>
 
-          <div class="password-strength">
+        <div class="showcase-bottom">
+          <span>TRACK</span><span>PLAN</span><span>GROW</span>
+        </div>
+      </div>
+    </section>
 
-            <div class="strength-bars">
+    <section class="auth-form-area" aria-label="Create your account">
+      <div class="auth-form-inner">
 
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+        <div class="mobile-brand">
+          <span class="auth-logo">F</span>
+          <strong>Finora</strong>
+        </div>
 
+        <div class="login-heading register-heading">
+          <div class="welcome-tag"><span>✦</span> New here?</div>
+          <h2>Create your<br><span>money space.</span></h2>
+          <p>Set up your demo account in less than a minute.</p>
+        </div>
+
+        <form id="register" class="modern-login-form">
+          <label class="input-group" for="name">
+            <span class="input-label">Full name</span>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">✦</span>
+              <input id="name" name="name" type="text" required
+                autocomplete="name" placeholder="Your full name">
+            </div>
+          </label>
+
+          <label class="input-group" for="email">
+            <span class="input-label">Email address</span>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">@</span>
+              <input id="email" name="email" type="email" required
+                autocomplete="email" placeholder="you@example.com">
+            </div>
+          </label>
+
+          <label class="input-group" for="phone">
+            <span class="input-label">Phone number</span>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">☎</span>
+              <input id="phone" name="phone" type="tel" required
+                autocomplete="tel" placeholder="+91 98765 43210">
+            </div>
+          </label>
+
+          <label class="input-group" for="password">
+            <span class="input-label">Password</span>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">⌑</span>
+              <input id="password" name="password" type="password"
+                minlength="6" required autocomplete="new-password"
+                placeholder="Create a password">
+              <button class="password-toggle" type="button"
+                id="toggleRegisterPassword" aria-label="Show password"
+                aria-pressed="false">◉</button>
             </div>
 
+            <div class="password-strength">
+              <div class="strength-bars" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <small id="strengthText" aria-live="polite">Use 6+ characters</small>
+            </div>
+          </label>
 
-            <small id="strengthText">
+          <label class="input-group" for="confirm">
+            <span class="input-label">Confirm password</span>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">✓</span>
+              <input id="confirm" name="confirm" type="password"
+                required autocomplete="new-password"
+                placeholder="Repeat your password">
+              <button class="password-toggle" type="button"
+                id="toggleConfirmPassword" aria-label="Show password"
+                aria-pressed="false">◉</button>
+            </div>
+          </label>
 
-              Use 6+ characters
+          <div id="error" class="login-error" role="alert" aria-live="polite"></div>
 
-            </small>
+          <button class="login-button register-button" type="submit">
+            <span>Create my account</span>
+            <span class="button-arrow" aria-hidden="true">↗</span>
+          </button>
+        </form>
 
-          </div>
+        <div class="auth-divider">
+          <span></span><small>ALREADY A USER?</small><span></span>
+        </div>
 
-        </label>
+        <p class="create-account">
+          Already have an account?
+          <a href="login.html">Sign in <span>↗</span></a>
+        </p>
 
-
-
-        <!-- CONFIRM PASSWORD -->
-
-        <label class="input-group">
-
-          <span class="input-label">
-
-            Confirm password
-
-          </span>
-
-
-          <div class="input-wrap">
-
-            <span class="input-icon">
-
-              ✓
-
-            </span>
-
-
-            <input
-              id="confirm"
-              type="password"
-              required
-              autocomplete="new-password"
-              placeholder="Repeat your password"
-            >
-
-
-            <button
-              class="password-toggle"
-              type="button"
-              id="toggleConfirmPassword"
-              aria-label="Show password"
-            >
-
-              ◉
-
-            </button>
-
-          </div>
-
-        </label>
-
-
-
-        <div id="error" class="login-error"></div>
-
-
-
-        <!-- CREATE BUTTON -->
-
-        <button
-          class="login-button register-button"
-          type="submit"
-        >
-
-          <span>Create my account</span>
-
-          <span class="button-arrow">
-
-            ↗
-
-          </span>
-
-        </button>
-
-
-      </form>
-
-
-
-      <!-- LOGIN LINK -->
-
-      <div class="auth-divider">
-
-        <span></span>
-
-        <small>ALREADY A USER?</small>
-
-        <span></span>
-
+        <div class="login-footer">
+          <span>🔒 Demo environment</span>
+          <span>•</span>
+          <span>No real money involved</span>
+        </div>
       </div>
-
-
-
-      <p class="create-account">
-
-        Already have an account?
-
-        <a href="login.html">
-
-          Sign in
-
-          <span>↗</span>
-
-        </a>
-
-      </p>
-
-
-
-      <!-- FOOTER -->
-
-      <div class="login-footer">
-
-        <span>🔒 Demo environment</span>
-
-        <span>•</span>
-
-        <span>No real money involved</span>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-</div>
-
-
-
-<script src="js/app.js"></script>
-
-
-<script>
-
-/* =========================================================
-   PASSWORD VISIBILITY
-   ========================================================= */
-
-function setupPasswordToggle(buttonId, inputId){
-
-  const button = document.getElementById(buttonId);
-
-  const input = document.getElementById(inputId);
-
-
-  if(!button || !input) return;
-
-
-  button.addEventListener("click", () => {
-
-    const hidden = input.type === "password";
-
-
-    input.type = hidden
-      ? "text"
-      : "password";
-
-
-    button.textContent = hidden
-      ? "◉"
-      : "◌";
-
-  });
-
-}
-
-
-setupPasswordToggle(
-  "toggleRegisterPassword",
-  "password"
-);
-
-
-setupPasswordToggle(
-  "toggleConfirmPassword",
-  "confirm"
-);
-
-
-
-/* =========================================================
-   PASSWORD STRENGTH
-   ========================================================= */
-
-const passwordInput =
-  document.getElementById("password");
-
-const strengthBars =
-  document.querySelectorAll(".strength-bars span");
-
-const strengthText =
-  document.getElementById("strengthText");
-
-
-if(passwordInput){
-
-  passwordInput.addEventListener(
-    "input",
-    () => {
-
-      const value =
-        passwordInput.value;
-
-
-      let strength = 0;
-
-
-      if(value.length >= 6)
-        strength++;
-
-
-      if(value.length >= 9)
-        strength++;
-
-
-      if(/[A-Z]/.test(value))
-        strength++;
-
-
-      if(/[0-9!@#$%^&*]/.test(value))
-        strength++;
-
-
-      strengthBars.forEach(
-        (bar,index) => {
-
-          bar.classList.toggle(
-            "active",
-            index < strength
-          );
-
-        }
-      );
-
-
-      if(!value){
-
-        strengthText.textContent =
-          "Use 6+ characters";
-
-      }
-      else if(strength <= 1){
-
-        strengthText.textContent =
-          "Weak password";
-
-      }
-      else if(strength === 2){
-
-        strengthText.textContent =
-          "Getting stronger";
-
-      }
-      else if(strength === 3){
-
-        strengthText.textContent =
-          "Good password";
-
-      }
-      else{
-
-        strengthText.textContent =
-          "Strong password ✦";
-
-      }
-
+    </section>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Password visibility
+    function setupPasswordToggle(buttonId, inputId) {
+      const button = document.getElementById(buttonId);
+      const input = document.getElementById(inputId);
+      if (!button || !input) return;
+
+      button.addEventListener("click", () => {
+        const show = input.type === "password";
+        input.type = show ? "text" : "password";
+        button.textContent = show ? "◌" : "◉";
+        button.setAttribute("aria-label", show ? "Hide password" : "Show password");
+        button.setAttribute("aria-pressed", String(show));
+      });
     }
-  );
 
-}
+    setupPasswordToggle("toggleRegisterPassword", "password");
+    setupPasswordToggle("toggleConfirmPassword", "confirm");
 
-</script>
+    // Password strength indicator
+    const passwordInput = document.getElementById("password");
+    const strengthBars = document.querySelectorAll(".strength-bars span");
+    const strengthText = document.getElementById("strengthText");
 
+    if (passwordInput) {
+      passwordInput.addEventListener("input", () => {
+        const value = passwordInput.value;
+        let strength = 0;
+
+        if (value.length >= 6) strength++;
+        if (value.length >= 9) strength++;
+        if (/[A-Z]/.test(value)) strength++;
+        if (/[0-9!@#$%^&*]/.test(value)) strength++;
+
+        strengthBars.forEach((bar, index) => {
+          bar.classList.toggle("active", index < strength);
+        });
+
+        if (!value) {
+          strengthText.textContent = "Use 6+ characters";
+        } else if (strength <= 1) {
+          strengthText.textContent = "Weak password";
+        } else if (strength === 2) {
+          strengthText.textContent = "Getting stronger";
+        } else if (strength === 3) {
+          strengthText.textContent = "Good password";
+        } else {
+          strengthText.textContent = "Strong password";
+        }
+      });
+    }
+
+    // Check that the two passwords match before submitting.
+    // app.js still handles creating the account and saving it locally.
+    const registerForm = document.getElementById("register");
+    const confirmInput = document.getElementById("confirm");
+    const errorBox = document.getElementById("error");
+
+    if (registerForm && confirmInput && errorBox) {
+      registerForm.addEventListener("submit", (event) => {
+        if (passwordInput.value !== confirmInput.value) {
+          event.preventDefault();
+          errorBox.textContent = "Your passwords do not match.";
+          confirmInput.focus();
+        } else {
+          errorBox.textContent = "";
+        }
+      });
+
+      confirmInput.addEventListener("input", () => {
+        if (errorBox.textContent === "Your passwords do not match.") {
+          errorBox.textContent = "";
+        }
+      });
+    }
+  </script>
 </body>
 </html>
+```

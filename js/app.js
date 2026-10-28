@@ -1247,14 +1247,57 @@ function renderSavings(){const c=$("#content"),g=data("savings");c.innerHTML=`<d
 function renderAnalytics(){const c=$("#content"),inc=data("income"),ex=data("expenses"),ti=inc.reduce((s,x)=>s+x.amount,0),te=ex.reduce((s,x)=>s+x.amount,0),cats={};ex.forEach(x=>cats[x.category]=(cats[x.category]||0)+x.amount);let max=Math.max(...Object.values(cats),1);c.innerHTML=`<div class="grid stats"><div class="card stat"><small>Income</small><h2 class="pos">${money(ti)}</h2></div><div class="card stat"><small>Expenses</small><h2 class="neg">${money(te)}</h2></div><div class="card stat"><small>Net cash flow</small><h2>${money(ti-te)}</h2></div><div class="card stat"><small>Savings rate</small><h2>${ti?Math.round((ti-te)/ti*100):0}%</h2></div></div><div class="section-head"><h2>Financial analytics</h2></div><div class="grid two"><div class="card"><h2>Expense categories</h2>${Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="budget-item"><div class="budget-top"><b>${k}</b><span>${money(v)}</span></div><div class="progress"><span style="width:${v/max*100}%"></span></div></div>`).join("")}</div><div class="card"><h2>Income vs Expenses</h2><div class="mini-chart"><div class="bar-col"><div class="bar" style="height:${Math.max(8,ti/Math.max(ti,te)*100)}%"></div><small>Income</small></div><div class="bar-col"><div class="bar" style="height:${Math.max(8,te/Math.max(ti,te)*100)}%"></div><small>Expense</small></div></div></div></div><div class="card" style="margin-top:18px"><h2>Spending activity</h2><div class="mini-chart">${[35,52,41,78,60,48,69].map((v,i)=>`<div class="bar-col"><div class="bar" style="height:${v}%"></div><small>${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]}</small></div>`).join("")}</div></div>`}
 function renderProfile(){const c=$("#content"),u=user();c.innerHTML=`<div class="grid two"><div class="card"><div class="profile"><div class="profile-avatar">${esc(u.name.split(" ").map(x=>x[0]).join(""))}</div><div><h2 style="margin:0">${esc(u.name)}</h2><p class="muted">${esc(u.email)}</p></div></div><div class="section-head"><h2>Profile information</h2><button class="btn primary small" onclick="editProfile()">Edit</button></div><p><span class="muted">Phone</span><br><b>${esc(u.phone||"Not provided")}</b></p><p><span class="muted">User ID</span><br><b>${u.id}</b></p></div><div class="card"><h2>About this project</h2><p class="muted" style="line-height:1.7">This is a frontend-only college project. All data is fictional and stored in your browser LocalStorage. No real banking or payment services are connected.</p><button class="btn danger" onclick="localStorage.removeItem('finora_currentUser');location.href='login.html'">Logout</button></div></div>`;window.editProfile=()=>modal("Edit profile",`<form id="pf" class="form"><label>Name<input id="pn" class="input" value="${esc(u.name)}" required></label><label>Phone<input id="pp" class="input" value="${esc(u.phone||"")}" required></label><button class="btn primary full">Save changes</button></form>`,()=>$("#pf").onsubmit=e=>{e.preventDefault();let a=get("users"),x=a.find(z=>z.id===u.id);x.name=$("#pn").value;x.phone=$("#pp").value;set("users",a);$("#modal").innerHTML="";toast("Profile updated");setTimeout(()=>location.reload(),400)})}
 
-async function boot(){
- const path=location.pathname.toLowerCase();
- if(path.endsWith("login.html")||path.endsWith("register.html")){await ensureData();auth();return}
- if(path.endsWith("index.html")||path.endsWith("/"))return;
- await ensureData();shell();const p=document.body.dataset.page;
- if(!user())return;
- ({dashboard:renderDashboard,accounts:renderAccounts,transactions:renderTransactions,income:()=>renderCrud("income","Income"),expenses:()=>renderCrud("expenses","Expense"),budgets:renderBudgets,savings:renderSavings,analytics:renderAnalytics,profile:renderProfile}[p]||renderDashboard)();
+
+async function boot() {
+  const path = location.pathname.toLowerCase();
+
+  // Login and registration pages
+  if (path.endsWith("login.html") || path.endsWith("register.html")) {
+    await ensureData();
+    shell();
+    auth();
+    updateThemeButton();
+    return;
+  }
+
+  // Landing page
+  if (path.endsWith("index.html") || path.endsWith("/")) {
+    updateThemeButton();
+    return;
+  }
+
+  // Load shared data and check the signed-in user
+  await ensureData();
+  shell();
+
+  if (!user()) return;
+
+  const page = document.body.dataset.page;
+
+  // The new dashboard has its own renderer in dashboard.js.
+  // Do not run the old renderDashboard() on that page.
+  if (page === "dashboard") {
+    updateThemeButton();
+    return;
+  }
+
+  const renderers = {
+    accounts: renderAccounts,
+    transactions: renderTransactions,
+    income: () => renderCrud("income", "Income"),
+    expenses: () => renderCrud("expenses", "Expense"),
+    budgets: renderBudgets,
+    savings: renderSavings,
+    analytics: renderAnalytics,
+    profile: renderProfile
+  };
+
+  (renderers[page] || renderDashboard)();
+  updateThemeButton();
 }
+
+boot();
+
 function auth(){
  const login=$("#login"),reg=$("#register");
  if(login)login.onsubmit=e=>{e.preventDefault();const u=get("users").find(x=>x.email.toLowerCase()===$("#email").value.trim().toLowerCase()&&x.password===$("#password").value);if(!u){$("#error").textContent="Invalid email or password.";return}localStorage.setItem("finora_currentUser",u.id);location.href="dashboard.html"};

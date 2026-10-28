@@ -1,356 +1,777 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0D1B2A">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f3">
+  <meta name="description" content="Sign in to Finora, your personal finance dashboard.">
   <title>Login — Finora</title>
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* FINORA AUTH — MONOCHROME EDITION */
+    .auth-page {
+      --auth-bg: #f5f5f3;
+      --auth-card: #ffffff;
+      --auth-text: #202020;
+      --auth-muted: #777773;
+      --auth-border: #e7e6e2;
+      --auth-dark: #202020;
+      --auth-soft: #f0efec;
+      margin: 0;
+      min-height: 100vh;
+      background: var(--auth-bg);
+      color: var(--auth-text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+
+    .auth-page * { box-sizing: border-box; }
+
+    .auth-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(420px, .96fr);
+      min-height: 100vh;
+      padding: 16px;
+      gap: 16px;
+    }
+
+    /* LEFT SHOWCASE */
+    .auth-showcase {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      min-height: 700px;
+      padding: clamp(30px, 5vw, 72px);
+      border-radius: 24px;
+      background: #e9e8e4;
+      isolation: isolate;
+    }
+
+    .auth-showcase::before,
+    .auth-showcase::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border: 1px solid rgba(32,32,32,.09);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .auth-showcase::before {
+      width: 540px;
+      height: 540px;
+      right: -180px;
+      top: -170px;
+    }
+
+    .auth-showcase::after {
+      width: 400px;
+      height: 400px;
+      right: -110px;
+      top: -100px;
+    }
+
+    .noise, .glow { display: none; }
+
+    .showcase-content {
+      position: relative;
+      width: 100%;
+      max-width: 590px;
+      margin: auto;
+    }
+
+    .auth-brand, .mobile-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 21px;
+      font-weight: 750;
+      letter-spacing: -.8px;
+    }
+
+    .auth-logo {
+      display: grid;
+      width: 39px;
+      height: 39px;
+      place-items: center;
+      border-radius: 12px;
+      background: #202020;
+      color: white;
+      font-size: 23px;
+      font-weight: 750;
+    }
+
+    .showcase-copy { margin-top: clamp(55px, 9vh, 105px); }
+
+    .mini-pill, .welcome-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 12px;
+      border: 1px solid rgba(32,32,32,.13);
+      border-radius: 100px;
+      background: rgba(255,255,255,.42);
+      color: #555550;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: 1.5px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #343434;
+    }
+
+    .showcase-copy h1 {
+      max-width: 520px;
+      margin: 27px 0 18px;
+      font-size: clamp(43px, 5vw, 69px);
+      font-weight: 750;
+      line-height: 1.04;
+      letter-spacing: -3.8px;
+    }
+
+    .showcase-copy h1 span {
+      display: block;
+      color: #777772;
+      font-weight: 450;
+    }
+
+    .showcase-copy p {
+      max-width: 420px;
+      color: #686863;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    /* Floating finance preview */
+    .float-card {
+      position: relative;
+      border: 1px solid rgba(32,32,32,.09);
+      border-radius: 17px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 18px 50px rgba(32,32,32,.06);
+      color: #252525;
+      animation: authRise .65s ease both;
+      backdrop-filter: blur(12px);
+    }
+
+    .balance-float {
+      max-width: 340px;
+      margin: 42px 0 0 auto;
+      padding: 21px;
+    }
+
+    .float-top, .balance-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .float-top, .balance-meta, .float-card small {
+      color: #777772;
+      font-size: 11px;
+    }
+
+    .float-menu { letter-spacing: 2px; }
+
+    .balance-float > strong {
+      display: block;
+      margin-top: 13px;
+      font-size: 32px;
+      letter-spacing: -1.4px;
+    }
+
+    .balance-meta { justify-content: flex-start; margin-top: 8px; }
+    .balance-up { color: #484843; font-weight: 750; }
+
+    .mini-chart {
+      display: flex;
+      align-items: end;
+      gap: 7px;
+      height: 54px;
+      margin-top: 21px;
+    }
+
+    .mini-chart span {
+      flex: 1;
+      min-width: 0;
+      border-radius: 4px 4px 2px 2px;
+      background: #d4d3ce;
+    }
+
+    .mini-chart span:nth-last-child(-n+3) { background: #555550; }
+
+    .savings-float {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      max-width: 325px;
+      margin: -28px 0 0 0;
+      padding: 15px;
+      animation-delay: .1s;
+    }
+
+    .saving-icon {
+      display: grid;
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 13px;
+      background: #eeede9;
+      font-size: 25px;
+    }
+
+    .saving-info { flex: 1; min-width: 0; }
+    .saving-info small { display: block; margin-bottom: 4px; }
+    .saving-info strong { font-size: 13px; }
+
+    .saving-progress {
+      height: 5px;
+      margin: 9px 0 6px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #e7e6e1;
+    }
+
+    .saving-progress span {
+      display: block;
+      width: 65%;
+      height: 100%;
+      border-radius: inherit;
+      background: #454540;
+    }
+
+    .saving-percent { font-size: 13px; }
+
+    .spending-float {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      width: fit-content;
+      margin: 13px 0 0 auto;
+      padding: 15px 19px;
+      animation-delay: .2s;
+    }
+
+    .spending-ring {
+      display: grid;
+      width: 51px;
+      height: 51px;
+      flex-shrink: 0;
+      place-items: center;
+      border: 5px solid #deddd7;
+      border-right-color: #42423e;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .spending-float small, .spending-float strong { display: block; }
+    .spending-float strong { margin-top: 4px; font-size: 17px; }
+    .spending-float p { margin: 4px 0 0; color: #686863; font-size: 11px; }
+
+    .showcase-bottom {
+      display: flex;
+      gap: 22px;
+      margin-top: 36px;
+      color: #777772;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: 2px;
+    }
+
+    /* RIGHT LOGIN PANEL */
+    .auth-form-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(24px, 4vw, 65px);
+      border: 1px solid #ecebe7;
+      border-radius: 24px;
+      background: var(--auth-card);
+    }
+
+    .auth-form-inner { width: 100%; max-width: 405px; }
+    .mobile-brand { display: none; }
+
+    .login-heading { margin-bottom: 32px; }
+
+    .welcome-tag {
+      padding: 8px 12px;
+      background: #f7f6f3;
+      border-color: #eeede8;
+      font-size: 11px;
+      letter-spacing: .2px;
+      text-transform: none;
+    }
+
+    .welcome-tag span { font-size: 15px; }
+
+    .login-heading h2 {
+      margin: 22px 0 10px;
+      font-size: clamp(36px, 3.4vw, 47px);
+      font-weight: 750;
+      line-height: 1.12;
+      letter-spacing: -2px;
+    }
+
+    .login-heading h2 span { color: #898983; }
+    .login-heading p { margin: 0; color: var(--auth-muted); font-size: 14px; }
+
+    .modern-login-form { display: grid; gap: 20px; }
+    .input-group { display: block; }
+
+    .input-label {
+      display: block;
+      margin-bottom: 9px;
+      color: #343430;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      min-height: 53px;
+      gap: 12px;
+      padding: 0 14px;
+      border: 1px solid #e5e4df;
+      border-radius: 12px;
+      background: #fff;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+
+    .input-wrap:focus-within {
+      border-color: #666660;
+      box-shadow: 0 0 0 4px rgba(32,32,32,.055);
+    }
+
+    .input-icon { color: #777772; font-size: 17px; }
+
+    .input-wrap input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #202020;
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .input-wrap input::placeholder { color: #aaa9a3; }
+
+    .password-toggle {
+      flex-shrink: 0;
+      padding: 5px;
+      border: 0;
+      background: transparent;
+      color: #777772;
+      cursor: pointer;
+      font-size: 17px;
+    }
+
+    .password-toggle:hover { color: #202020; }
+
+    .login-error {
+      color: #a33c3c;
+      font-size: 12px;
+    }
+
+    .login-error:empty { display: none; }
+
+    .login-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 54px;
+      padding: 0 18px;
+      border: 1px solid #202020;
+      border-radius: 12px;
+      background: #202020;
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .2s, background .2s, box-shadow .2s;
+    }
+
+    .login-button:hover {
+      transform: translateY(-2px);
+      background: #383834;
+      box-shadow: 0 9px 22px rgba(0,0,0,.12);
+    }
+
+    .button-arrow { font-size: 18px; }
+
+    .demo-section { margin-top: 30px; }
+
+    .demo-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #888780;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: 1.5px;
+    }
+
+    .demo-line { flex: 1; height: 1px; background: #eae9e4; }
+    .demo-users { display: grid; gap: 8px; margin-top: 13px; }
+
+    .demo-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #eeede9;
+      border-radius: 12px;
+      background: #fff;
+      color: #252525;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+
+    .demo-user:hover {
+      transform: translateX(3px);
+      border-color: #c9c8c1;
+      background: #faf9f7;
+    }
+
+    .demo-avatar {
+      display: grid;
+      width: 37px;
+      height: 37px;
+      flex-shrink: 0;
+      place-items: center;
+      border-radius: 11px;
+      background: #e9e8e3;
+      color: #292929;
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .avatar-purple, .avatar-blue, .avatar-sage {
+      background: #e9e8e3;
+      color: #292929;
+    }
+
+    .demo-details { display: grid; gap: 4px; flex: 1; }
+    .demo-details strong { font-size: 12px; }
+    .demo-details small { color: #898880; font-size: 11px; }
+    .demo-arrow { color: #898880; font-size: 16px; }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin: 24px 0 20px;
+      color: #a09f98;
+    }
+
+    .auth-divider span { flex: 1; height: 1px; background: #eeede9; }
+    .auth-divider small { font-size: 10px; }
+
+    .create-account {
+      margin: 0;
+      color: #777772;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .create-account a {
+      color: #252525;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .create-account a:hover { text-decoration: underline; }
+    .create-account a span { margin-left: 3px; }
+
+    .login-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+      color: #96958e;
+      font-size: 10px;
+    }
+
+    @keyframes authRise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 1500px) {
+      .auth-wrap { max-width: 1800px; margin: auto; }
+    }
+
+    @media (max-width: 1050px) {
+      .auth-wrap { grid-template-columns: minmax(0, .9fr) minmax(390px, 1.1fr); }
+      .auth-showcase { padding: 32px; }
+      .showcase-copy h1 { font-size: 48px; letter-spacing: -2.5px; }
+      .auth-form-area { padding: 32px; }
+    }
+
+    @media (max-width: 780px) {
+      .auth-wrap { display: block; padding: 0; }
+      .auth-showcase { display: none; }
+      .auth-form-area {
+        min-height: 100vh;
+        padding: 34px 24px;
+        border: 0;
+        border-radius: 0;
+      }
+      .auth-form-inner { max-width: 430px; }
+      .mobile-brand { display: flex; margin-bottom: 45px; }
+      .login-heading h2 { font-size: 39px; }
+      .demo-section { margin-top: 27px; }
+    }
+
+    @media (max-width: 420px) {
+      .auth-form-area { padding: 27px 19px; }
+      .mobile-brand { margin-bottom: 36px; }
+      .login-heading h2 { font-size: 35px; }
+      .login-heading { margin-bottom: 26px; }
+      .modern-login-form { gap: 17px; }
+      .login-footer { gap: 6px; font-size: 9px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .auth-page *, .auth-page *::before, .auth-page *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="auth-page">
+  <div class="auth-wrap">
 
-<div class="auth-wrap">
-
-  <!-- ================= LEFT VISUAL ================= -->
-  <section class="auth-showcase">
-
-    <div class="noise"></div>
-    <div class="glow glow-one"></div>
-    <div class="glow glow-two"></div>
-    <div class="glow glow-three"></div>
-
-    <div class="showcase-content">
-
-      <div class="auth-brand">
-        <span class="auth-logo">F</span>
-        <span>Finora</span>
-      </div>
-
-      <div class="showcase-copy">
-        <div class="mini-pill">
-          <span class="pulse-dot"></span>
-          YOUR MONEY. YOUR WAY.
+    <section class="auth-showcase" aria-label="Finora introduction">
+      <div class="showcase-content">
+        <div class="auth-brand">
+          <span class="auth-logo">F</span>
+          <span>Finora</span>
         </div>
 
-        <h1>
-          Your money,
-          <span>but make it</span>
-          make sense.
-        </h1>
-
-        <p>
-          Track it. Plan it. Grow it.
-          Everything you need to stay on top of your money —
-          without the boring spreadsheets.
-        </p>
-      </div>
-
-
-      <!-- FLOATING BALANCE CARD -->
-      <div class="float-card balance-float">
-
-        <div class="float-top">
-          <span>Available balance</span>
-          <span class="float-menu">•••</span>
-        </div>
-
-        <strong>₹84,250</strong>
-
-        <div class="balance-meta">
-          <span class="balance-up">↗ 12.8%</span>
-          <span>this month</span>
-        </div>
-
-        <div class="mini-chart">
-          <span style="height:28%"></span>
-          <span style="height:42%"></span>
-          <span style="height:35%"></span>
-          <span style="height:55%"></span>
-          <span style="height:48%"></span>
-          <span style="height:72%"></span>
-          <span style="height:63%"></span>
-          <span style="height:88%"></span>
-          <span style="height:76%"></span>
-          <span style="height:96%"></span>
-        </div>
-
-      </div>
-
-
-      <!-- FLOATING SAVINGS CARD -->
-      <div class="float-card savings-float">
-
-        <div class="saving-icon">◎</div>
-
-        <div class="saving-info">
-          <small>Saving for</small>
-          <strong>Dream Trip ✈</strong>
-
-          <div class="saving-progress">
-            <span></span>
+        <div class="showcase-copy">
+          <div class="mini-pill">
+            <span class="pulse-dot"></span>
+            YOUR MONEY. YOUR WAY.
           </div>
 
-          <small>₹32,400 / ₹50,000</small>
+          <h1>Your money,<span>made clearer.</span></h1>
+
+          <p>
+            Track your spending, plan your next move, and understand your money
+            at a glance. Your entire financial life, in one calmer space.
+          </p>
         </div>
 
-        <strong class="saving-percent">65%</strong>
-
-      </div>
-
-
-      <!-- FLOATING SPENDING CARD -->
-      <div class="float-card spending-float">
-
-        <div class="spending-ring">
-          <span>72%</span>
+        <div class="float-card balance-float">
+          <div class="float-top">
+            <span>Available balance</span>
+            <span class="float-menu">•••</span>
+          </div>
+          <strong>₹84,250</strong>
+          <div class="balance-meta">
+            <span class="balance-up">↗ 12.8%</span>
+            <span>this month</span>
+          </div>
+          <div class="mini-chart" aria-label="Illustrative balance chart">
+            <span style="height:28%"></span>
+            <span style="height:42%"></span>
+            <span style="height:35%"></span>
+            <span style="height:55%"></span>
+            <span style="height:48%"></span>
+            <span style="height:72%"></span>
+            <span style="height:63%"></span>
+            <span style="height:88%"></span>
+            <span style="height:76%"></span>
+            <span style="height:96%"></span>
+          </div>
         </div>
 
-        <div>
-          <small>Monthly spending</small>
-          <strong>₹18,420</strong>
-          <p>↓ 8.4% vs last month</p>
+        <div class="float-card savings-float">
+          <div class="saving-icon">◎</div>
+          <div class="saving-info">
+            <small>Saving for</small>
+            <strong>Dream Trip</strong>
+            <div class="saving-progress"><span></span></div>
+            <small>₹32,400 / ₹50,000</small>
+          </div>
+          <strong class="saving-percent">65%</strong>
         </div>
 
-      </div>
-
-
-      <div class="showcase-bottom">
-        <span>TRACK</span>
-        <span>PLAN</span>
-        <span>GROW</span>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ================= RIGHT LOGIN ================= -->
-  <section class="auth-form-area">
-
-    <div class="auth-form-inner">
-
-      <div class="mobile-brand">
-        <span class="auth-logo">F</span>
-        <strong>Finora</strong>
-      </div>
-
-
-      <div class="login-heading">
-
-        <div class="welcome-tag">
-          <span>✦</span>
-          Welcome back
+        <div class="float-card spending-float">
+          <div class="spending-ring"><span>72%</span></div>
+          <div>
+            <small>Monthly spending</small>
+            <strong>₹18,420</strong>
+            <p>↓ 8.4% vs last month</p>
+          </div>
         </div>
 
-        <h2>Let's get you<br><span>back in.</span></h2>
-
-        <p>
-          Your financial world is waiting.
-        </p>
-
+        <div class="showcase-bottom">
+          <span>TRACK</span><span>PLAN</span><span>GROW</span>
+        </div>
       </div>
+    </section>
 
+    <section class="auth-form-area" aria-label="Sign in">
+      <div class="auth-form-inner">
 
-      <form id="login" class="modern-login-form">
+        <div class="mobile-brand">
+          <span class="auth-logo">F</span>
+          <strong>Finora</strong>
+        </div>
 
-        <label class="input-group">
+        <div class="login-heading">
+          <div class="welcome-tag"><span>✦</span> Welcome back</div>
+          <h2>Let's get you<br><span>back in.</span></h2>
+          <p>Your financial world is waiting.</p>
+        </div>
 
-          <span class="input-label">Email address</span>
+        <form id="login" class="modern-login-form">
+          <label class="input-group" for="email">
+            <span class="input-label">Email address</span>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">@</span>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="you@example.com"
+              >
+            </div>
+          </label>
 
-          <div class="input-wrap">
+          <label class="input-group" for="password">
+            <span class="input-label">Password</span>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">⌑</span>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                autocomplete="current-password"
+                placeholder="Enter your password"
+              >
+              <button
+                class="password-toggle"
+                type="button"
+                id="togglePassword"
+                aria-label="Show password"
+                aria-pressed="false"
+              >◉</button>
+            </div>
+          </label>
 
-            <span class="input-icon">@</span>
+          <div id="error" class="login-error" role="alert" aria-live="polite"></div>
 
-            <input
-              id="email"
-              type="email"
-              required
-              autocomplete="email"
-              placeholder="you@example.com"
-            >
+          <button class="login-button" type="submit">
+            <span>Sign in to Finora</span>
+            <span class="button-arrow" aria-hidden="true">↗</span>
+          </button>
+        </form>
 
+        <div class="demo-section">
+          <div class="demo-heading">
+            <span>EXPLORE A DEMO ACCOUNT</span>
+            <span class="demo-line"></span>
           </div>
 
-        </label>
-
-
-        <label class="input-group">
-
-          <span class="input-label">Password</span>
-
-          <div class="input-wrap">
-
-            <span class="input-icon">⌑</span>
-
-            <input
-              id="password"
-              type="password"
-              required
-              autocomplete="current-password"
-              placeholder="Enter your password"
-            >
-
-            <button
-              class="password-toggle"
-              type="button"
-              id="togglePassword"
-              aria-label="Show password"
-            >
-              ◉
+          <div class="demo-users">
+            <button class="demo-user" type="button"
+              data-email="riya@example.com" data-password="riya123">
+              <span class="demo-avatar">R</span>
+              <span class="demo-details">
+                <strong>Riya</strong><small>Personal account</small>
+              </span>
+              <span class="demo-arrow" aria-hidden="true">↗</span>
             </button>
 
+            <button class="demo-user" type="button"
+              data-email="rahul@example.com" data-password="rahul123">
+              <span class="demo-avatar">R</span>
+              <span class="demo-details">
+                <strong>Rahul</strong><small>Personal account</small>
+              </span>
+              <span class="demo-arrow" aria-hidden="true">↗</span>
+            </button>
+
+            <button class="demo-user" type="button"
+              data-email="priya@example.com" data-password="priya123">
+              <span class="demo-avatar">P</span>
+              <span class="demo-details">
+                <strong>Priya</strong><small>Personal account</small>
+              </span>
+              <span class="demo-arrow" aria-hidden="true">↗</span>
+            </button>
           </div>
-
-        </label>
-
-
-        <div id="error" class="login-error"></div>
-
-
-        <button class="login-button" type="submit">
-
-          <span>Sign in</span>
-
-          <span class="button-arrow">↗</span>
-
-        </button>
-
-      </form>
-
-
-      <!-- DEMO ACCOUNTS -->
-      <div class="demo-section">
-
-        <div class="demo-heading">
-          <span>TRY THE DEMO</span>
-          <span class="demo-line"></span>
         </div>
 
+        <div class="auth-divider"><span></span><small>OR</small><span></span></div>
 
-        <div class="demo-users">
+        <p class="create-account">
+          New to Finora?
+          <a href="register.html">Create your account <span>↗</span></a>
+        </p>
 
-          <button
-            class="demo-user"
-            type="button"
-            data-email="riya@example.com"
-            data-password="riya123"
-          >
-            <span class="demo-avatar avatar-purple">R</span>
-
-            <span class="demo-details">
-              <strong>Riya</strong>
-              <small>Personal account</small>
-            </span>
-
-            <span class="demo-arrow">↗</span>
-          </button>
-
-
-          <button
-            class="demo-user"
-            type="button"
-            data-email="rahul@example.com"
-            data-password="rahul123"
-          >
-            <span class="demo-avatar avatar-blue">R</span>
-
-            <span class="demo-details">
-              <strong>Rahul</strong>
-              <small>Personal account</small>
-            </span>
-
-            <span class="demo-arrow">↗</span>
-          </button>
-
-
-          <button
-            class="demo-user"
-            type="button"
-            data-email="priya@example.com"
-            data-password="priya123"
-          >
-            <span class="demo-avatar avatar-sage">P</span>
-
-            <span class="demo-details">
-              <strong>Priya</strong>
-              <small>Personal account</small>
-            </span>
-
-            <span class="demo-arrow">↗</span>
-          </button>
-
+        <div class="login-footer">
+          <span>🔒 Demo environment</span>
+          <span>•</span>
+          <span>No real money involved</span>
         </div>
-
       </div>
+    </section>
+  </div>
 
+  <script src="js/app.js"></script>
+  <script>
+    // Password visibility
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
 
-      <div class="auth-divider">
-        <span></span>
-        <small>OR</small>
-        <span></span>
-      </div>
+    if (togglePassword && passwordInput) {
+      togglePassword.addEventListener("click", () => {
+        const showPassword = passwordInput.type === "password";
+        passwordInput.type = showPassword ? "text" : "password";
+        togglePassword.setAttribute("aria-label",
+          showPassword ? "Hide password" : "Show password");
+        togglePassword.setAttribute("aria-pressed", String(showPassword));
+        togglePassword.textContent = showPassword ? "◌" : "◉";
+      });
+    }
 
-
-      <p class="create-account">
-        New to Finora?
-        <a href="register.html">
-          Create your account <span>↗</span>
-        </a>
-      </p>
-
-
-      <div class="login-footer">
-        <span>🔒 Demo environment</span>
-        <span>•</span>
-        <span>No real money involved</span>
-      </div>
-
-    </div>
-
-  </section>
-
-</div>
-
-
-<script src="js/app.js"></script>
-
-
-<script>
-  /* Password visibility */
-  const togglePassword = document.getElementById("togglePassword");
-  const passwordInput = document.getElementById("password");
-
-  if (togglePassword && passwordInput) {
-    togglePassword.addEventListener("click", () => {
-
-      const isPassword = passwordInput.type === "password";
-
-      passwordInput.type = isPassword ? "text" : "password";
-
-      togglePassword.textContent = isPassword ? "◉" : "◌";
-
+    // Demo buttons fill the form; the user still clicks Sign in.
+    document.querySelectorAll(".demo-user").forEach(button => {
+      button.addEventListener("click", () => {
+        document.getElementById("email").value = button.dataset.email;
+        passwordInput.value = button.dataset.password;
+        document.getElementById("error").textContent = "";
+        document.getElementById("email").focus();
+      });
     });
-  }
-
-
-  /* Demo login buttons */
-  document.querySelectorAll(".demo-user").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      document.getElementById("email").value =
-        button.dataset.email;
-
-      document.getElementById("password").value =
-        button.dataset.password;
-
-      document.getElementById("email").focus();
-
-    });
-
-  });
-</script>
-
+  </script>
 </body>
 </html>
+```
