@@ -78,5 +78,14 @@
     "number": "3154",
     "balance": 55000,
     "status": "Active"
+  },
+   {
+    "id": "a304",
+    "userId": "u004",
+    "type": "Fixed Deposit",
+    "number": "3167",
+    "balance": 55000,
+    "status": "Active"
   }
+
 ]
