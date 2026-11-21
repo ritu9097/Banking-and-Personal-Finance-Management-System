@@ -1,0 +1,748 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f3">
+  <meta name="description" content="Finora helps you track spending, manage budgets, and work toward your savings goals.">
+  <title>Finora — Your Money, Made Clearer</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .landing {
+      --bg: #f5f5f3;
+      --paper: #fff;
+      --ink: #202020;
+      --muted: #777772;
+      --line: #e7e6e2;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+
+    .landing * { box-sizing: border-box; }
+    .landing a { color: inherit; text-decoration: none; }
+    .landing button { font: inherit; }
+
+    .landing-shell {
+      width: min(1240px, calc(100% - 64px));
+      margin: auto;
+    }
+
+    .landing-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 84px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .landing-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .landing-logo {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .landing-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 27px;
+      color: #696963;
+      font-size: 13px;
+    }
+
+    .landing-nav-links a:hover { color: #111; }
+
+    .landing-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .landing-signin { color: #4f4f49; }
+    .landing-signin:hover { color: #000; }
+
+    .landing-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 13px;
+      min-height: 47px;
+      padding: 0 19px;
+      border: 1px solid #202020;
+      border-radius: 10px;
+      background: #202020;
+      color: #fff !important;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .2s, background .2s, box-shadow .2s;
+    }
+
+    .landing-cta:hover {
+      transform: translateY(-2px);
+      background: #383834;
+      box-shadow: 0 9px 22px rgba(0,0,0,.1);
+    }
+
+    .landing-cta .arrow { font-size: 17px; }
+
+    /* HERO */
+    .landing-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .92fr);
+      align-items: center;
+      gap: clamp(40px, 7vw, 95px);
+      padding: 82px 0 90px;
+    }
+
+    .landing-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 12px;
+      border: 1px solid #e1e0db;
+      border-radius: 100px;
+      background: rgba(255,255,255,.5);
+      color: #5d5d57;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .landing-eyebrow span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #353530;
+    }
+
+    .landing-hero h1 {
+      max-width: 660px;
+      margin: 27px 0 21px;
+      font-size: clamp(48px, 6.3vw, 79px);
+      font-weight: 780;
+      line-height: .99;
+      letter-spacing: -5px;
+    }
+
+    .landing-hero h1 span {
+      display: block;
+      color: #85857e;
+      font-weight: 450;
+    }
+
+    .landing-description {
+      max-width: 480px;
+      margin: 0;
+      color: #70706a;
+      font-size: 15px;
+      line-height: 1.95;
+    }
+
+    .landing-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-top: 31px;
+    }
+
+    .landing-secondary {
+      color: #42423d !important;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .landing-secondary span { margin-left: 5px; }
+
+    .landing-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 19px;
+      margin-top: 29px;
+      color: #777772;
+      font-size: 11px;
+    }
+
+    .landing-trust span { display: inline-flex; align-items: center; gap: 7px; }
+    .landing-trust strong { color: #343430; }
+
+    /* Decorative dashboard preview */
+    .landing-preview-wrap {
+      position: relative;
+      min-width: 0;
+      padding: 15px 0 15px 15px;
+      animation: landingEnter .7s ease both;
+    }
+
+    .landing-preview-wrap::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: 0 -18px 0 55px;
+      border: 1px solid #e3e2dc;
+      border-radius: 25px;
+      background: #ecebe6;
+      transform: rotate(3deg);
+    }
+
+    .landing-preview {
+      position: relative;
+      z-index: 1;
+      padding: 22px;
+      border: 1px solid #e5e4df;
+      border-radius: 19px;
+      background: #fff;
+      box-shadow: 0 28px 70px rgba(25,25,25,.09);
+    }
+
+    .preview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 19px;
+      border-bottom: 1px solid #efeee9;
+    }
+
+    .preview-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .preview-mini-logo {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 8px;
+      background: #202020;
+      color: white;
+      font-weight: 800;
+    }
+
+    .preview-period {
+      padding: 8px 10px;
+      border: 1px solid #e9e8e3;
+      border-radius: 8px;
+      color: #6d6d66;
+      font-size: 10px;
+    }
+
+    .preview-greeting {
+      margin-top: 23px;
+      color: #777772;
+      font-size: 11px;
+    }
+
+    .preview-title {
+      margin-top: 5px;
+      font-size: 20px;
+      font-weight: 750;
+      letter-spacing: -.6px;
+    }
+
+    .preview-balance {
+      margin-top: 19px;
+      padding: 20px;
+      border-radius: 13px;
+      background: #242422;
+      color: white;
+    }
+
+    .preview-balance-label { color: #c3c3bc; font-size: 11px; }
+
+    .preview-balance-value {
+      display: block;
+      margin-top: 8px;
+      font-size: clamp(25px, 3vw, 35px);
+      font-weight: 750;
+      letter-spacing: -1.3px;
+    }
+
+    .preview-balance-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+      color: #d1d1cb;
+      font-size: 10px;
+    }
+
+    .preview-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 13px;
+    }
+
+    .preview-stat {
+      padding: 15px;
+      border: 1px solid #eeede8;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .preview-stat-label { color: #777772; font-size: 10px; }
+
+    .preview-stat-value {
+      display: block;
+      margin-top: 8px;
+      font-size: 19px;
+      font-weight: 750;
+      letter-spacing: -.5px;
+    }
+
+    .preview-stat-note {
+      display: block;
+      margin-top: 5px;
+      color: #777772;
+      font-size: 10px;
+    }
+
+    .preview-lower {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 12px;
+      margin-top: 13px;
+    }
+
+    .preview-panel {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid #eeede8;
+      border-radius: 12px;
+    }
+
+    .preview-panel-title {
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .preview-chart {
+      display: flex;
+      align-items: end;
+      gap: 6px;
+      height: 81px;
+      margin-top: 13px;
+    }
+
+    .preview-chart span {
+      flex: 1;
+      min-width: 0;
+      border-radius: 4px 4px 1px 1px;
+      background: #d8d7d1;
+    }
+
+    .preview-chart span:nth-child(2n) { background: #888880; }
+    .preview-chart span:last-child { background: #30302d; }
+
+    .preview-goal {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      min-height: 113px;
+      margin-top: 9px;
+      border-radius: 10px;
+      background: #f3f2ee;
+      text-align: center;
+    }
+
+    .preview-goal-ring {
+      display: grid;
+      width: 58px;
+      height: 58px;
+      place-items: center;
+      border: 5px solid #d8d7d1;
+      border-right-color: #33332f;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .preview-goal small { margin-top: 8px; color: #777772; font-size: 9px; }
+
+    .preview-note {
+      margin: 12px 0 0;
+      color: #a09f98;
+      text-align: center;
+      font-size: 9px;
+    }
+
+    /* FEATURES */
+    .landing-features {
+      padding: 65px 0 72px;
+      border-top: 1px solid var(--line);
+    }
+
+    .landing-section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 29px;
+    }
+
+    .landing-section-kicker {
+      color: #777772;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+    }
+
+    .landing-section-head h2 {
+      max-width: 510px;
+      margin: 11px 0 0;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.12;
+      letter-spacing: -1.8px;
+    }
+
+    .landing-section-head p {
+      max-width: 340px;
+      margin: 0;
+      color: #777772;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .landing-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .landing-feature {
+      padding: 25px;
+      border: 1px solid #e6e5e0;
+      border-radius: 15px;
+      background: rgba(255,255,255,.62);
+      transition: transform .2s, border-color .2s, background .2s;
+    }
+
+    .landing-feature:hover {
+      transform: translateY(-4px);
+      border-color: #c9c8c1;
+      background: #fff;
+    }
+
+    .feature-icon {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      place-items: center;
+      border: 1px solid #e5e4df;
+      border-radius: 12px;
+      background: #f0efec;
+      font-size: 19px;
+    }
+
+    .landing-feature h3 {
+      margin: 19px 0 9px;
+      font-size: 16px;
+      letter-spacing: -.3px;
+    }
+
+    .landing-feature p {
+      margin: 0;
+      color: #777772;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* FINAL CTA + FOOTER */
+    .landing-final {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      margin: 0 0 35px;
+      padding: 32px;
+      border-radius: 18px;
+      background: #e9e8e4;
+    }
+
+    .landing-final h2 {
+      margin: 0;
+      font-size: clamp(23px, 3vw, 34px);
+      letter-spacing: -1.3px;
+    }
+
+    .landing-final p {
+      margin: 9px 0 0;
+      color: #696963;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .landing-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 23px 0 29px;
+      border-top: 1px solid var(--line);
+      color: #85857e;
+      font-size: 11px;
+    }
+
+    .landing-footer-brand { color: #33332f; font-weight: 800; }
+
+    @keyframes landingEnter {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1000px) {
+      .landing-shell { width: min(100% - 44px, 760px); }
+      .landing-nav-links { gap: 15px; }
+      .landing-hero { gap: 35px; padding: 65px 0 72px; }
+      .landing-hero h1 { font-size: clamp(43px, 6vw, 60px); letter-spacing: -3px; }
+      .landing-preview { padding: 15px; }
+      .preview-lower { grid-template-columns: 1fr; }
+      .preview-goal { min-height: 95px; }
+    }
+
+    @media (max-width: 740px) {
+      .landing-shell { width: calc(100% - 36px); }
+      .landing-nav { min-height: 72px; }
+      .landing-nav-links { display: none; }
+      .landing-nav-actions { gap: 13px; }
+      .landing-nav-actions .landing-cta { min-height: 41px; padding: 0 12px; }
+      .landing-hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 55px 0 60px;
+      }
+      .landing-hero h1 { max-width: 570px; font-size: clamp(45px, 10vw, 67px); }
+      .landing-description { font-size: 14px; }
+      .landing-preview-wrap { max-width: 510px; width: 100%; margin: auto; }
+      .preview-lower { grid-template-columns: 1.15fr .85fr; }
+      .landing-section-head { align-items: start; flex-direction: column; }
+      .landing-feature-grid { grid-template-columns: 1fr; }
+      .landing-feature { padding: 22px; }
+      .landing-final { align-items: start; flex-direction: column; padding: 25px; }
+    }
+
+    @media (max-width: 420px) {
+      .landing-shell { width: calc(100% - 28px); }
+      .landing-brand { font-size: 19px; }
+      .landing-logo { width: 35px; height: 35px; }
+      .landing-nav-actions { gap: 10px; font-size: 12px; }
+      .landing-nav-actions .landing-cta { font-size: 11px; }
+      .landing-hero { padding-top: 43px; }
+      .landing-hero h1 { font-size: 44px; letter-spacing: -2.8px; }
+      .landing-hero-actions { align-items: flex-start; flex-direction: column; gap: 17px; }
+      .landing-trust { gap: 11px; }
+      .landing-preview { padding: 12px; }
+      .preview-balance { padding: 15px; }
+      .preview-balance-value { font-size: 26px; }
+      .preview-stats { gap: 8px; }
+      .preview-stat { padding: 11px; }
+      .preview-stat-value { font-size: 16px; }
+      .preview-lower { grid-template-columns: 1fr; }
+      .preview-goal { min-height: 110px; }
+      .landing-footer { align-items: start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .landing *, .landing *::before, .landing *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="landing">
+  <header class="landing-shell landing-nav">
+    <a class="landing-brand" href="index.html" aria-label="Finora home">
+      <span class="landing-logo">F</span>
+      <span>Finora</span>
+    </a>
+
+    <nav class="landing-nav-links" aria-label="Main navigation">
+      <a href="#features">Features</a>
+      <a href="#how-it-helps">Why Finora</a>
+    </nav>
+
+    <div class="landing-nav-actions">
+      <a class="landing-signin" href="login.html">Sign in</a>
+      <a class="landing-cta" href="register.html">
+        Get started <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="landing-shell landing-hero" id="how-it-helps">
+      <div>
+        <div class="landing-eyebrow">
+          <span></span>
+          A CLEARER WAY TO MANAGE MONEY
+        </div>
+
+        <h1>Your money,<span>made clearer.</span></h1>
+
+        <p class="landing-description">
+          Bring your accounts, spending, budgets and savings goals together
+          in one simple dashboard. Make sense of your money without the
+          spreadsheet chaos.
+        </p>
+
+        <div class="landing-hero-actions">
+          <a class="landing-cta" href="register.html">
+            Create your account <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="landing-secondary" href="login.html">
+            Already have an account? Sign in <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="landing-trust">
+          <span><strong>✓</strong> Track spending</span>
+          <span><strong>✓</strong> Plan budgets</span>
+          <span><strong>✓</strong> Set goals</span>
+        </div>
+      </div>
+
+      <div class="landing-preview-wrap" aria-label="Illustrative Finora dashboard preview">
+        <div class="landing-preview">
+          <div class="preview-top">
+            <div class="preview-brand">
+              <span class="preview-mini-logo">F</span>
+              Finora overview
+            </div>
+            <span class="preview-period">Monthly view</span>
+          </div>
+
+          <div class="preview-greeting">YOUR FINANCES AT A GLANCE</div>
+          <div class="preview-title">Your money overview</div>
+
+          <div class="preview-balance">
+            <span class="preview-balance-label">Total balance</span>
+            <strong class="preview-balance-value">₹84,250.00</strong>
+            <div class="preview-balance-meta">
+              <span>Illustrative demo data</span>
+              <span>INR ₹</span>
+            </div>
+          </div>
+
+          <div class="preview-stats">
+            <div class="preview-stat">
+              <span class="preview-stat-label">Income</span>
+              <strong class="preview-stat-value">₹32,500</strong>
+              <span class="preview-stat-note">Monthly overview</span>
+            </div>
+            <div class="preview-stat">
+              <span class="preview-stat-label">Expenses</span>
+              <strong class="preview-stat-value">₹18,420</strong>
+              <span class="preview-stat-note">Spending overview</span>
+            </div>
+          </div>
+
+          <div class="preview-lower">
+            <div class="preview-panel">
+              <div class="preview-panel-title">Cash flow</div>
+              <div class="preview-chart" aria-hidden="true">
+                <span style="height:32%"></span>
+                <span style="height:48%"></span>
+                <span style="height:39%"></span>
+                <span style="height:65%"></span>
+                <span style="height:53%"></span>
+                <span style="height:75%"></span>
+                <span style="height:60%"></span>
+                <span style="height:88%"></span>
+              </div>
+            </div>
+
+            <div class="preview-panel">
+              <div class="preview-panel-title">Savings goal</div>
+              <div class="preview-goal">
+                <div class="preview-goal-ring">65%</div>
+                <small>Dream trip</small>
+              </div>
+            </div>
+          </div>
+
+          <p class="preview-note">Illustrative values — not connected to a bank.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-shell landing-features" id="features">
+      <div class="landing-section-head">
+        <div>
+          <div class="landing-section-kicker">MADE FOR EVERYDAY MONEY</div>
+          <h2>Everything in one place.<br>A little more peace of mind.</h2>
+        </div>
+        <p>
+          A straightforward way to understand your finances, keep track
+          of your plans and stay aware of your spending.
+        </p>
+      </div>
+
+      <div class="landing-feature-grid">
+        <article class="landing-feature">
+          <div class="feature-icon" aria-hidden="true">◫</div>
+          <h3>See all your accounts</h3>
+          <p>View account balances and keep your demo financial information organized from one dashboard.</p>
+        </article>
+
+        <article class="landing-feature">
+          <div class="feature-icon" aria-hidden="true">↗</div>
+          <h3>Understand your spending</h3>
+          <p>Review income, expenses and transaction history to see where your money is going.</p>
+        </article>
+
+        <article class="landing-feature">
+          <div class="feature-icon" aria-hidden="true">◎</div>
+          <h3>Plan your next goal</h3>
+          <p>Set budget limits, monitor savings targets and make your financial plans easier to follow.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="landing-shell landing-final">
+      <div>
+        <h2>Ready to get your money in order?</h2>
+        <p>Create a demo account and explore the Finora personal finance dashboard.</p>
+      </div>
+      <a class="landing-cta" href="register.html">
+        Get started <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="landing-shell landing-footer">
+    <span class="landing-footer-brand">Finora</span>
+    <span>Personal finance management · Frontend demo project</span>
+    <span>No real banking connection or real money involved.</span>
+  </footer>
+</body>
+</html>
+```

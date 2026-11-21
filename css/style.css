@@ -1,0 +1,1545 @@
+
+/* =====================================================
+   FINORA — MODERN MONOCHROME DASHBOARD
+   Palette: Charcoal | White | Soft Grey | Off-white
+   File: css/dashboard.css
+===================================================== */
+
+/* ---------- DESIGN TOKENS ---------- */
+
+.finora-dashboard {
+    --mono-bg: #f5f5f2;
+    --mono-card: #ffffff;
+    --mono-sidebar: #202329;
+    --mono-sidebar-hover: #30343b;
+    --mono-text: #202329;
+    --mono-muted: #858992;
+    --mono-border: #e9e9e6;
+    --mono-accent: #30343b;
+    --mono-soft: #f0f0ed;
+    --mono-positive: #36765c;
+    --mono-positive-bg: #eaf4ed;
+    --mono-negative: #b45353;
+    --mono-negative-bg: #faeeee;
+    --mono-radius: 18px;
+    --mono-shadow: 0 5px 24px rgba(24, 27, 32, 0.035);
+
+    margin: 0;
+    min-height: 100vh;
+    background: var(--mono-bg);
+    color: var(--mono-text);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.finora-dashboard *,
+.finora-dashboard *::before,
+.finora-dashboard *::after {
+    box-sizing: border-box;
+}
+
+.finora-dashboard button,
+.finora-dashboard input,
+.finora-dashboard select {
+    font: inherit;
+}
+
+.finora-dashboard button,
+.finora-dashboard a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.finora-dashboard a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.finora-dashboard button {
+    cursor: pointer;
+}
+
+.finora-dashboard svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.8;
+}
+
+.finora-dashboard h1,
+.finora-dashboard h2,
+.finora-dashboard h3,
+.finora-dashboard p {
+    margin-top: 0;
+}
+
+.finora-dashboard h1,
+.finora-dashboard h2,
+.finora-dashboard h3,
+.finora-dashboard .brand-name {
+    font-family: "Manrope", sans-serif;
+}
+
+/* ---------- MAIN LAYOUT ---------- */
+
+.finora-dashboard .dashboard-layout {
+    min-height: 100vh;
+}
+
+.finora-dashboard .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    padding: 27px 18px 18px;
+    overflow-y: auto;
+    background: var(--mono-sidebar);
+    color: #fff;
+    transition: transform 0.28s ease;
+}
+
+.finora-dashboard .brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: fit-content;
+    margin: 0 0 42px 7px;
+}
+
+.finora-dashboard .brand-mark {
+    display: grid;
+    width: 39px;
+    height: 39px;
+    place-items: center;
+    border-radius: 12px;
+    background: #fff;
+    color: #202329;
+    font-family: "Manrope", sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.finora-dashboard .brand-name {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -1.2px;
+}
+
+.finora-dashboard .brand-dot,
+.finora-dashboard .heading-period {
+    color: #858992;
+}
+
+.finora-dashboard .sidebar-section {
+    flex: 1;
+}
+
+.finora-dashboard .sidebar-label {
+    margin: 0 0 13px 12px;
+    color: #858992;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+}
+
+.finora-dashboard .sidebar-nav {
+    display: grid;
+    gap: 5px;
+}
+
+.finora-dashboard .nav-link {
+    position: relative;
+    display: flex;
+    min-height: 45px;
+    align-items: center;
+    gap: 13px;
+    padding: 0 13px;
+    border-radius: 10px;
+    color: #b8bbc2;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.finora-dashboard .nav-link svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+}
+
+.finora-dashboard .nav-link:hover {
+    background: var(--mono-sidebar-hover);
+    color: #fff;
+}
+
+.finora-dashboard .nav-link.active {
+    background: #fff;
+    color: #202329;
+    font-weight: 700;
+}
+
+.finora-dashboard .sidebar-bottom {
+    margin-top: 30px;
+}
+
+.finora-dashboard .upgrade-card {
+    padding: 17px 15px;
+    margin-bottom: 18px;
+    border: 1px solid #3c4048;
+    border-radius: 14px;
+    background: #282c33;
+}
+
+.finora-dashboard .upgrade-icon {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 13px;
+    place-items: center;
+    border-radius: 9px;
+    background: #3a3e46;
+}
+
+.finora-dashboard .upgrade-card h3 {
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.finora-dashboard .upgrade-card p {
+    margin-bottom: 0;
+    color: #b2b5bd;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.finora-dashboard .profile-shortcut {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 5px 2px;
+    border-top: 1px solid #3c4048;
+}
+
+.finora-dashboard .avatar,
+.finora-dashboard .topbar-avatar {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    place-items: center;
+    border: 1px solid #e2e2df;
+    border-radius: 50%;
+    background: #ededeb;
+    color: #292c31;
+    font-weight: 700;
+}
+
+.finora-dashboard .profile-shortcut-info {
+    display: grid;
+    flex: 1;
+    min-width: 0;
+    gap: 2px;
+}
+
+.finora-dashboard .profile-shortcut-info strong {
+    overflow: hidden;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.finora-dashboard .profile-shortcut-info span {
+    color: #a9adb5;
+    font-size: 10px;
+}
+
+.finora-dashboard .profile-shortcut > svg {
+    width: 15px;
+    color: #a9adb5;
+}
+
+/* ---------- MAIN CONTENT AND TOPBAR ---------- */
+
+.finora-dashboard .main-content {
+    min-width: 0;
+    min-height: 100vh;
+    margin-left: 250px;
+}
+
+.finora-dashboard .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    min-height: 75px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 35px;
+    border-bottom: 1px solid var(--mono-border);
+    background: rgba(255, 255, 255, 0.93);
+    backdrop-filter: blur(14px);
+}
+
+.finora-dashboard .topbar-left,
+.finora-dashboard .topbar-actions,
+.finora-dashboard .breadcrumb {
+    display: flex;
+    align-items: center;
+}
+
+.finora-dashboard .topbar-left {
+    gap: 16px;
+}
+
+.finora-dashboard .breadcrumb {
+    gap: 10px;
+    color: var(--mono-muted);
+    font-size: 12px;
+}
+
+.finora-dashboard .breadcrumb svg {
+    width: 13px;
+    height: 13px;
+}
+
+.finora-dashboard .breadcrumb strong {
+    color: var(--mono-text);
+    font-weight: 600;
+}
+
+.finora-dashboard .topbar-actions {
+    gap: 13px;
+}
+
+.finora-dashboard .date-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #646871;
+    font-size: 12px;
+}
+
+.finora-dashboard .date-display svg {
+    width: 16px;
+    height: 16px;
+}
+
+.finora-dashboard .icon-button {
+    display: grid;
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+    place-items: center;
+    border: 1px solid var(--mono-border);
+    border-radius: 11px;
+    background: #fff;
+    color: var(--mono-text);
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.finora-dashboard .icon-button:hover {
+    border-color: #c8c9c6;
+    background: #f0f0ed;
+}
+
+.finora-dashboard .topbar-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+}
+
+.finora-dashboard .menu-toggle {
+    display: none;
+}
+
+/* ---------- DASHBOARD CONTENT ---------- */
+
+.finora-dashboard .dashboard-content {
+    width: 100%;
+    max-width: 1700px;
+    padding: 34px 35px 20px;
+    margin: 0 auto;
+}
+
+.finora-dashboard .welcome-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 27px;
+}
+
+.finora-dashboard .eyebrow {
+    margin-bottom: 8px;
+    color: var(--mono-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+}
+
+.finora-dashboard .welcome-section h1 {
+    margin-bottom: 7px;
+    font-size: clamp(25px, 2.5vw, 33px);
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    line-height: 1.25;
+}
+
+.finora-dashboard .welcome-description {
+    margin-bottom: 0;
+    color: var(--mono-muted);
+    font-size: 13px;
+}
+
+.finora-dashboard .button {
+    display: inline-flex;
+    min-height: 43px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 17px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.finora-dashboard .button svg {
+    width: 16px;
+    height: 16px;
+}
+
+.finora-dashboard .button:hover {
+    transform: translateY(-1px);
+}
+
+.finora-dashboard .button-primary {
+    background: #202329;
+    color: #fff;
+}
+
+.finora-dashboard .button-primary:hover {
+    background: #393d44;
+}
+
+.finora-dashboard .button-secondary {
+    border-color: #e4e4e1;
+    background: #fff;
+    color: #292c31;
+}
+
+.finora-dashboard .button-secondary:hover {
+    background: #f1f1ee;
+}
+
+/* ---------- SUMMARY CARDS ---------- */
+
+.finora-dashboard .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+    margin-bottom: 22px;
+}
+
+.finora-dashboard .summary-card {
+    position: relative;
+    min-width: 0;
+    min-height: 167px;
+    padding: 20px;
+    overflow: hidden;
+    border: 1px solid var(--mono-border);
+    border-radius: var(--mono-radius);
+    background: var(--mono-card);
+    box-shadow: var(--mono-shadow);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.finora-dashboard .summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(24, 27, 32, 0.065);
+}
+
+.finora-dashboard .summary-card-top,
+.finora-dashboard .summary-card-bottom {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.finora-dashboard .summary-card-top {
+    color: #747780;
+    font-size: 12px;
+}
+
+.finora-dashboard .summary-icon {
+    display: grid;
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 10px;
+    background: #f0f0ed;
+    color: #30343b;
+}
+
+.finora-dashboard .summary-icon svg {
+    width: 17px;
+    height: 17px;
+}
+
+.finora-dashboard .income-icon {
+    background: #edf3ee;
+    color: #36765c;
+}
+
+.finora-dashboard .expense-icon {
+    background: #f7eded;
+    color: #a85252;
+}
+
+.finora-dashboard .savings-icon {
+    background: #efefed;
+    color: #555b64;
+}
+
+.finora-dashboard .summary-value,
+.finora-dashboard .balance-value {
+    position: relative;
+    z-index: 2;
+    margin: 17px 0 15px;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(19px, 1.7vw, 26px);
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    overflow-wrap: anywhere;
+}
+
+.finora-dashboard .summary-card-bottom {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.finora-dashboard .trend-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 7px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.finora-dashboard .trend-pill svg {
+    width: 12px;
+    height: 12px;
+}
+
+.finora-dashboard .trend-pill.positive {
+    background: var(--mono-positive-bg);
+    color: var(--mono-positive);
+}
+
+.finora-dashboard .trend-pill.negative {
+    background: var(--mono-negative-bg);
+    color: var(--mono-negative);
+}
+
+.finora-dashboard .trend-pill.neutral {
+    background: #efefed;
+    color: #555b64;
+}
+
+.finora-dashboard .comparison-text {
+    color: #9699a0;
+    font-size: 10px;
+}
+
+.finora-dashboard .summary-progress,
+.finora-dashboard .goal-progress {
+    height: 4px;
+    margin-top: 15px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #efefed;
+}
+
+.finora-dashboard .summary-progress > span,
+.finora-dashboard .goal-progress > span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #343941;
+}
+
+.finora-dashboard .expense-progress > span {
+    background: #aa7777;
+}
+
+.finora-dashboard .savings-progress > span {
+    background: #7e9285;
+}
+
+/* Main balance card */
+
+.finora-dashboard .balance-card {
+    border-color: #202329;
+    background: #202329;
+    color: #fff;
+}
+
+.finora-dashboard .balance-card .summary-card-top {
+    color: #c5c7cc;
+}
+
+.finora-dashboard .balance-card .summary-icon {
+    background: #383c44;
+    color: #fff;
+}
+
+.finora-dashboard .balance-card .balance-value {
+    font-size: clamp(22px, 2vw, 29px);
+}
+
+.finora-dashboard .balance-card .comparison-text {
+    color: #b7bac1;
+}
+
+.finora-dashboard .balance-decoration {
+    position: absolute;
+    z-index: 1;
+    width: 120px;
+    height: 120px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.finora-dashboard .balance-decoration-one {
+    right: -50px;
+    bottom: -60px;
+}
+
+.finora-dashboard .balance-decoration-two {
+    right: -25px;
+    bottom: -85px;
+    width: 170px;
+    height: 170px;
+}
+
+/* ---------- ANALYTICS PANELS ---------- */
+
+.finora-dashboard .analytics-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.finora-dashboard .panel {
+    min-width: 0;
+    padding: 23px;
+    border: 1px solid var(--mono-border);
+    border-radius: var(--mono-radius);
+    background: var(--mono-card);
+    box-shadow: var(--mono-shadow);
+}
+
+.finora-dashboard .panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.finora-dashboard .panel-header .eyebrow {
+    margin-bottom: 6px;
+}
+
+.finora-dashboard .panel-header h2 {
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.finora-dashboard .panel-description {
+    margin-bottom: 0;
+    color: var(--mono-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.finora-dashboard .select-control {
+    min-height: 35px;
+    max-width: 145px;
+    padding: 0 10px;
+    border: 1px solid var(--mono-border);
+    border-radius: 8px;
+    outline: none;
+    background: var(--mono-card);
+    color: var(--mono-text);
+    font-size: 11px;
+}
+
+.finora-dashboard .select-control:focus {
+    border-color: #7c8087;
+}
+
+.finora-dashboard .cashflow-legend {
+    display: flex;
+    gap: 18px;
+    margin-top: 24px;
+    color: #737780;
+    font-size: 11px;
+}
+
+.finora-dashboard .cashflow-legend > span,
+.finora-dashboard .category-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.finora-dashboard .legend-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #30343b;
+}
+
+.finora-dashboard .income-dot {
+    background: #30343b;
+}
+
+.finora-dashboard .expense-dot {
+    background: #c4c6c3;
+}
+
+.finora-dashboard .chart-container {
+    position: relative;
+    width: 100%;
+    height: 255px;
+    margin-top: 13px;
+}
+
+.finora-dashboard .chart-container canvas,
+.finora-dashboard .donut-container canvas {
+    max-width: 100%;
+}
+
+.finora-dashboard .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    color: #555961;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.finora-dashboard .text-link:hover {
+    color: #111318;
+}
+
+.finora-dashboard .text-link svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* ---------- DONUT CHART ---------- */
+
+.finora-dashboard .donut-container {
+    position: relative;
+    display: grid;
+    width: 100%;
+    max-width: 225px;
+    aspect-ratio: 1;
+    margin: 20px auto 14px;
+    place-items: center;
+}
+
+.finora-dashboard .donut-center {
+    position: absolute;
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+    pointer-events: none;
+}
+
+.finora-dashboard .donut-center span {
+    color: var(--mono-muted);
+    font-size: 10px;
+}
+
+.finora-dashboard .donut-center strong {
+    font-family: "Manrope", sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.finora-dashboard .spending-legend {
+    display: grid;
+    gap: 14px;
+}
+
+.finora-dashboard .spending-legend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: #747780;
+    font-size: 11px;
+}
+
+.finora-dashboard .spending-legend-item strong {
+    color: var(--mono-text);
+    font-size: 11px;
+}
+
+.finora-dashboard .category-one {
+    background: #30343b;
+}
+
+.finora-dashboard .category-two {
+    background: #777c85;
+}
+
+.finora-dashboard .category-three {
+    background: #b5b8b5;
+}
+
+.finora-dashboard .category-four {
+    background: #deded8;
+}
+
+/* ---------- LOWER CONTENT ---------- */
+
+.finora-dashboard .bottom-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.9fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.finora-dashboard .bottom-grid .panel-header {
+    margin-bottom: 24px;
+}
+
+/* ---------- TRANSACTIONS TABLE ---------- */
+
+.finora-dashboard .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.finora-dashboard .transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.finora-dashboard .transactions-table th {
+    padding: 12px 11px;
+    border-bottom: 1px solid var(--mono-border);
+    color: #9699a0;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.finora-dashboard .transactions-table th:first-child,
+.finora-dashboard .transactions-table td:first-child {
+    padding-left: 0;
+}
+
+.finora-dashboard .transactions-table td {
+    padding: 15px 11px;
+    border-bottom: 1px solid #f0f0ed;
+    color: #777b84;
+    font-size: 11px;
+}
+
+.finora-dashboard .transactions-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.finora-dashboard .transaction-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.finora-dashboard .transaction-icon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    place-items: center;
+    border: 1px solid var(--mono-border);
+    border-radius: 11px;
+    background: #f7f7f4;
+    color: #353941;
+}
+
+.finora-dashboard .transaction-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.finora-dashboard .transaction-name > div {
+    display: grid;
+    gap: 3px;
+}
+
+.finora-dashboard .transaction-name strong {
+    color: var(--mono-text);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.finora-dashboard .transaction-name > div > span {
+    color: #9699a0;
+    font-size: 10px;
+}
+
+.finora-dashboard .category-tag {
+    display: inline-flex;
+    padding: 5px 8px;
+    border-radius: 6px;
+    background: #f0f0ed;
+    color: #62666e;
+    font-size: 10px;
+}
+
+.finora-dashboard .amount-negative,
+.finora-dashboard .amount-positive {
+    font-weight: 700;
+}
+
+.finora-dashboard .amount-negative {
+    color: #555961 !important;
+}
+
+.finora-dashboard .amount-positive {
+    color: var(--mono-positive) !important;
+}
+
+/* ---------- SAVINGS GOALS ---------- */
+
+.finora-dashboard .goal-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--mono-border);
+}
+
+.finora-dashboard .goal-item:first-of-type {
+    padding-top: 0;
+}
+
+.finora-dashboard .goal-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.finora-dashboard .goal-icon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid var(--mono-border);
+    border-radius: 10px;
+    background: #f6f6f3;
+}
+
+.finora-dashboard .goal-icon svg {
+    width: 17px;
+    height: 17px;
+}
+
+.finora-dashboard .goal-percentage {
+    color: #656a72;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.finora-dashboard .goal-item h3 {
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.finora-dashboard .goal-amounts {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.finora-dashboard .goal-amounts strong {
+    font-size: 12px;
+}
+
+.finora-dashboard .goal-amounts span {
+    color: var(--mono-muted);
+    font-size: 10px;
+}
+
+.finora-dashboard .goal-progress {
+    margin-top: 12px;
+}
+
+.finora-dashboard .goal-progress > span {
+    background: #5a5f68;
+}
+
+.finora-dashboard .goal-button {
+    width: 100%;
+    margin-top: 19px;
+}
+
+/* ---------- FOOTER ---------- */
+
+.finora-dashboard .dashboard-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 18px 0 4px;
+    border-top: 1px solid #e6e6e2;
+    color: #8a8d94;
+    font-size: 10px;
+}
+
+.finora-dashboard .demo-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.finora-dashboard .demo-label svg {
+    width: 13px;
+    height: 13px;
+}
+
+/* ---------- TRANSACTION MODAL ---------- */
+
+.finora-dashboard .modal-overlay[hidden] {
+    display: none !important;
+}
+
+.finora-dashboard .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: grid;
+    padding: 20px;
+    overflow-y: auto;
+    place-items: center;
+    background: rgba(19, 21, 25, 0.55);
+    backdrop-filter: blur(5px);
+}
+
+.finora-dashboard .transaction-modal {
+    width: 100%;
+    max-width: 460px;
+    padding: 26px;
+    border: 1px solid var(--mono-border);
+    border-radius: 20px;
+    background: var(--mono-card);
+    color: var(--mono-text);
+    box-shadow: 0 25px 90px rgba(0, 0, 0, 0.15);
+}
+
+.finora-dashboard .modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.finora-dashboard .modal-header h2 {
+    margin-bottom: 0;
+    font-size: 22px;
+    letter-spacing: -0.7px;
+}
+
+.finora-dashboard #transactionForm {
+    display: grid;
+    gap: 9px;
+}
+
+.finora-dashboard #transactionForm label {
+    margin-top: 7px;
+    color: #555961;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.finora-dashboard #transactionForm input,
+.finora-dashboard #transactionForm select {
+    width: 100%;
+    min-height: 43px;
+    padding: 10px 12px;
+    border: 1px solid var(--mono-border);
+    border-radius: 9px;
+    outline: none;
+    background: var(--mono-card);
+    color: var(--mono-text);
+    font-size: 12px;
+}
+
+.finora-dashboard #transactionForm input:focus,
+.finora-dashboard #transactionForm select:focus {
+    border-color: #737780;
+    box-shadow: 0 0 0 3px rgba(32, 35, 41, 0.06);
+}
+
+.finora-dashboard .form-note {
+    margin: 7px 0;
+    color: var(--mono-muted);
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.finora-dashboard .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    margin-top: 10px;
+}
+
+.finora-dashboard .form-message {
+    margin-bottom: 0;
+    color: var(--mono-positive);
+    font-size: 11px;
+}
+
+/* ---------- RESPONSIVE: LAPTOP ---------- */
+
+@media (max-width: 1250px) {
+    .finora-dashboard .sidebar {
+        width: 225px;
+    }
+
+    .finora-dashboard .main-content {
+        margin-left: 225px;
+    }
+
+    .finora-dashboard .dashboard-content {
+        padding-right: 23px;
+        padding-left: 23px;
+    }
+
+    .finora-dashboard .topbar {
+        padding-right: 23px;
+        padding-left: 23px;
+    }
+
+    .finora-dashboard .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .finora-dashboard .summary-card {
+        min-height: 160px;
+    }
+
+    .finora-dashboard .summary-value {
+        font-size: 25px;
+    }
+}
+
+/* ---------- RESPONSIVE: TABLET ---------- */
+
+@media (max-width: 900px) {
+    .finora-dashboard .sidebar {
+        width: 250px;
+        transform: translateX(-100%);
+        box-shadow: none;
+    }
+
+    .finora-dashboard .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 15px 0 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .finora-dashboard .main-content {
+        margin-left: 0;
+    }
+
+    .finora-dashboard .menu-toggle {
+        display: grid;
+    }
+
+    .finora-dashboard .analytics-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .finora-dashboard .bottom-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .finora-dashboard .spending-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(180px, 0.8fr);
+        align-items: center;
+        column-gap: 22px;
+    }
+
+    .finora-dashboard .spending-panel > .panel-header {
+        grid-column: 1 / -1;
+    }
+
+    .finora-dashboard .donut-container {
+        width: 100%;
+        max-width: 220px;
+    }
+
+    .finora-dashboard .spending-legend {
+        align-self: center;
+    }
+}
+
+/* ---------- RESPONSIVE: MOBILE ---------- */
+
+@media (max-width: 600px) {
+    .finora-dashboard .topbar {
+        min-height: 65px;
+        padding: 12px 15px;
+    }
+
+    .finora-dashboard .topbar-left {
+        gap: 9px;
+    }
+
+    .finora-dashboard .breadcrumb {
+        gap: 5px;
+        font-size: 10px;
+    }
+
+    .finora-dashboard .topbar-actions {
+        gap: 7px;
+    }
+
+    .finora-dashboard .date-display {
+        display: none;
+    }
+
+    .finora-dashboard .topbar-avatar {
+        width: 33px;
+        height: 33px;
+    }
+
+    .finora-dashboard .icon-button {
+        width: 35px;
+        height: 35px;
+    }
+
+    .finora-dashboard .dashboard-content {
+        padding: 25px 15px 16px;
+    }
+
+    .finora-dashboard .welcome-section {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 17px;
+        margin-bottom: 22px;
+    }
+
+    .finora-dashboard .welcome-section h1 {
+        font-size: 27px;
+    }
+
+    .finora-dashboard .welcome-description {
+        font-size: 12px;
+    }
+
+    .finora-dashboard .summary-grid {
+        gap: 11px;
+    }
+
+    .finora-dashboard .summary-card {
+        min-height: 151px;
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .finora-dashboard .summary-card-top {
+        align-items: flex-start;
+        font-size: 10px;
+    }
+
+    .finora-dashboard .summary-icon {
+        width: 29px;
+        height: 29px;
+    }
+
+    .finora-dashboard .summary-icon svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .finora-dashboard .summary-value,
+    .finora-dashboard .balance-card .balance-value {
+        margin-top: 16px;
+        margin-bottom: 12px;
+        font-size: clamp(16px, 4.5vw, 22px);
+        letter-spacing: -0.6px;
+    }
+
+    .finora-dashboard .summary-card-bottom {
+        gap: 5px;
+    }
+
+    .finora-dashboard .trend-pill {
+        padding: 3px 5px;
+        font-size: 9px;
+    }
+
+    .finora-dashboard .comparison-text {
+        font-size: 9px;
+    }
+
+    .finora-dashboard .panel {
+        padding: 17px;
+        border-radius: 15px;
+    }
+
+    .finora-dashboard .panel-header h2 {
+        font-size: 16px;
+    }
+
+    .finora-dashboard .panel-description {
+        max-width: 240px;
+        font-size: 10px;
+    }
+
+    .finora-dashboard .select-control {
+        max-width: 112px;
+        font-size: 10px;
+    }
+
+    .finora-dashboard .chart-container {
+        height: 220px;
+    }
+
+    .finora-dashboard .spending-panel {
+        display: block;
+    }
+
+    .finora-dashboard .donut-container {
+        max-width: 205px;
+    }
+
+    .finora-dashboard .spending-legend {
+        gap: 13px;
+    }
+
+    .finora-dashboard .transactions-panel {
+        padding: 15px 12px;
+    }
+
+    .finora-dashboard .transactions-panel .panel-header {
+        padding: 0 3px;
+    }
+
+    .finora-dashboard .transactions-table th,
+    .finora-dashboard .transactions-table td {
+        padding-right: 9px;
+        padding-left: 9px;
+    }
+
+    .finora-dashboard .transaction-icon {
+        width: 31px;
+        height: 31px;
+    }
+
+    .finora-dashboard .transaction-name {
+        gap: 7px;
+    }
+
+    .finora-dashboard .transaction-name strong {
+        font-size: 10px;
+    }
+
+    .finora-dashboard .transaction-name > div > span {
+        font-size: 9px;
+    }
+
+    .finora-dashboard .category-tag {
+        padding: 4px 6px;
+        font-size: 9px;
+    }
+
+    .finora-dashboard .dashboard-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .finora-dashboard .transaction-modal {
+        padding: 21px;
+    }
+}
+
+/* ---------- SMALL MOBILE ---------- */
+
+@media (max-width: 360px) {
+    .finora-dashboard .dashboard-content {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .finora-dashboard .summary-card {
+        padding: 11px;
+    }
+
+    .finora-dashboard .summary-value,
+    .finora-dashboard .balance-card .balance-value {
+        font-size: 16px;
+    }
+
+    .finora-dashboard .comparison-text {
+        font-size: 8px;
+    }
+
+    .finora-dashboard .breadcrumb span {
+        display: none;
+    }
+}
+
+/* ---------- DARK MODE ---------- */
+
+html[data-theme="dark"] .finora-dashboard {
+    --mono-bg: #151619;
+    --mono-card: #202226;
+    --mono-sidebar: #101114;
+    --mono-sidebar-hover: #2a2c31;
+    --mono-text: #f1f1ef;
+    --mono-muted: #a0a2a9;
+    --mono-border: #34363b;
+    --mono-accent: #e8e8e5;
+    --mono-soft: #2b2d31;
+    --mono-positive: #8fc6a3;
+    --mono-positive-bg: #263b2e;
+    --mono-negative: #e19a9a;
+    --mono-negative-bg: #422b2b;
+    --mono-shadow: 0 5px 24px rgba(0, 0, 0, 0.10);
+}
+
+html[data-theme="dark"] .finora-dashboard .topbar {
+    border-color: var(--mono-border);
+    background: rgba(27, 28, 32, 0.94);
+}
+
+html[data-theme="dark"] .finora-dashboard .icon-button,
+html[data-theme="dark"] .finora-dashboard .button-secondary,
+html[data-theme="dark"] .finora-dashboard .select-control,
+html[data-theme="dark"] .finora-dashboard #transactionForm input,
+html[data-theme="dark"] .finora-dashboard #transactionForm select {
+    border-color: var(--mono-border);
+    background: #292b30;
+    color: var(--mono-text);
+}
+
+html[data-theme="dark"] .finora-dashboard .icon-button:hover,
+html[data-theme="dark"] .finora-dashboard .button-secondary:hover {
+    background: #35373c;
+}
+
+html[data-theme="dark"] .finora-dashboard .summary-icon,
+html[data-theme="dark"] .finora-dashboard .goal-icon,
+html[data-theme="dark"] .finora-dashboard .transaction-icon {
+    border-color: #3b3d42;
+    background: #2d2f34;
+    color: #f1f1ef;
+}
+
+html[data-theme="dark"] .finora-dashboard .summary-icon.income-icon {
+    background: #263b2e;
+    color: #8fc6a3;
+}
+
+html[data-theme="dark"] .finora-dashboard .summary-icon.expense-icon {
+    background: #422b2b;
+    color: #e19a9a;
+}
+
+html[data-theme="dark"] .finora-dashboard .summary-icon.savings-icon {
+    background: #303238;
+    color: #e5e5e2;
+}
+
+html[data-theme="dark"] .finora-dashboard .trend-pill.neutral,
+html[data-theme="dark"] .finora-dashboard .category-tag {
+    background: #303238;
+    color: #d4d5d8;
+}
+
+html[data-theme="dark"] .finora-dashboard .summary-progress,
+html[data-theme="dark"] .finora-dashboard .goal-progress {
+    background: #3a3c41;
+}
+
+html[data-theme="dark"] .finora-dashboard .balance-card {
+    border-color: #36383d;
+    background: #101114;
+}
+
+html[data-theme="dark"] .finora-dashboard .transactions-table td {
+    border-color: #303238;
+    color: #b7b9bf;
+}
+
+html[data-theme="dark"] .finora-dashboard .transactions-table th {
+    border-color: #3a3c41;
+}
+
+html[data-theme="dark"] .finora-dashboard .amount-negative {
+    color: #d0d1d4 !important;
+}
+
+html[data-theme="dark"] .finora-dashboard .text-link {
+    color: #d0d1d4;
+}
+
+html[data-theme="dark"] .finora-dashboard .text-link:hover {
+    color: #fff;
+}
+
+html[data-theme="dark"] .finora-dashboard .dashboard-footer {
+    border-color: var(--mono-border);
+}
+
+html[data-theme="dark"] .finora-dashboard .transaction-modal {
+    border-color: var(--mono-border);
+}
+
+html[data-theme="dark"] .finora-dashboard #transactionForm label {
+    color: #d0d1d4;
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .finora-dashboard *,
+    .finora-dashboard *::before,
+    .finora-dashboard *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
