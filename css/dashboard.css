@@ -1,0 +1,87 @@
+/* =========================================================
+   FINORA — DASHBOARD STYLES
+   ========================================================= */
+
+.dashboard-hero {
+  margin-bottom: 20px;
+}
+
+.cash-flow {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 170px;
+  padding: 16px 0 4px;
+}
+
+.cash-month {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 100%;
+  position: relative;
+}
+
+.cash-bar {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 4px 4px 1px 1px;
+  transition: height .4s var(--ease);
+}
+
+.cash-bar.income  { background: var(--sage); opacity: .92; }
+.cash-bar.expense { background: var(--steel-blue); opacity: .85; }
+
+.cash-month small {
+  font-size: .65rem;
+  color: var(--text-3);
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+.spending-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 90px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.spending-row:last-child {
+  border-bottom: 0;
+}
+
+.spending-track {
+  height: 6px;
+  background: var(--surface-alt);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.spending-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, var(--steel-blue), var(--sage));
+  transition: width .6s var(--ease);
+}
+
+.spending-row b {
+  text-align: right;
+  font-size: .8125rem;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.insight-card {
+  background: linear-gradient(145deg, var(--slate) 0%, #203146 100%);
+  border-color: rgba(255,255,255,.08);
+  color: var(--ivory);
+}
+
+[data-theme="dark"] .insight-card {
+  background: linear-gradient(145deg, #0D1A28 0%, #172738 100%);
+}

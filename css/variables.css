@@ -1,0 +1,112 @@
+/* =========================================================
+   FINORA — CSS VARIABLES
+   Premium Fintech Design System
+   ========================================================= */
+
+:root {
+  /* ── Brand palette ────────────────────────────────────── */
+  --navy:       #0D1B2A;
+  --slate:      #1B263B;
+  --sage:       #778D7A;
+  --steel-blue: #6B8299;
+  --beige:      #D4C4A8;
+  --ivory:      #F7F5EF;
+
+  /* ── Semantic aliases ─────────────────────────────────── */
+  --primary:      var(--navy);
+  --primary-mid:  var(--slate);
+  --accent:       var(--sage);
+  --interactive:  var(--steel-blue);
+
+  /* ── Light-mode surfaces ──────────────────────────────── */
+  --bg:          var(--ivory);
+  --surface:     #FFFFFF;
+  --surface-alt: #F2F0EA;
+  --border:      #E5E0D5;
+  --border-focus: var(--steel-blue);
+
+  /* ── Light-mode text ──────────────────────────────────── */
+  --text:    #1A2535;
+  --text-2:  #4D5A6A;
+  --text-3:  #8A95A3;
+
+  /* ── Semantic colours ─────────────────────────────────── */
+  --pos:    #4A7D62;
+  --neg:    #A85550;
+  --warn:   #9A7840;
+  --info:   var(--steel-blue);
+
+  /* ── Shadows ──────────────────────────────────────────── */
+  --shadow-xs:  0 1px 3px rgba(13,27,42,.06);
+  --shadow-sm:  0 4px 12px rgba(13,27,42,.07);
+  --shadow:     0 8px 24px rgba(13,27,42,.09);
+  --shadow-lg:  0 16px 40px rgba(13,27,42,.12);
+  --shadow-xl:  0 24px 64px rgba(13,27,42,.15);
+
+  /* ── Radii ────────────────────────────────────────────── */
+  --radius-sm: 8px;
+  --radius:    14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* ── Spacing ──────────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* ── Sidebar ──────────────────────────────────────────── */
+  --sidebar-w: 240px;
+  --sidebar-bg: linear-gradient(170deg, var(--navy) 0%, #162335 100%);
+  --sidebar-text: rgba(247,245,239,.65);
+  --sidebar-text-active: #FFFFFF;
+  --sidebar-active-bg: rgba(119,141,122,.18);
+  --sidebar-active-border: var(--sage);
+
+  /* ── Topbar ───────────────────────────────────────────── */
+  --topbar-bg: rgba(247,245,239,.92);
+  --topbar-border: rgba(229,224,213,.7);
+
+  /* ── Transitions ──────────────────────────────────────── */
+  --ease: cubic-bezier(.22,.68,0,1.1);
+  --t-fast:   .15s ease;
+  --t-normal: .22s ease;
+  --t-slow:   .35s ease;
+}
+
+/* ── Dark mode overrides ────────────────────────────────── */
+[data-theme="dark"] {
+  --bg:          #0A1220;
+  --surface:     #111C2D;
+  --surface-alt: #162336;
+  --border:      #243347;
+  --border-focus: var(--steel-blue);
+
+  --text:   #EDF1F6;
+  --text-2: #9BAABB;
+  --text-3: #5F7080;
+
+  --shadow-xs:  0 1px 3px rgba(0,0,0,.18);
+  --shadow-sm:  0 4px 12px rgba(0,0,0,.22);
+  --shadow:     0 8px 24px rgba(0,0,0,.28);
+  --shadow-lg:  0 16px 40px rgba(0,0,0,.34);
+  --shadow-xl:  0 24px 64px rgba(0,0,0,.40);
+
+  --topbar-bg:     rgba(10,18,32,.92);
+  --topbar-border: rgba(36,51,71,.8);
+
+  --sidebar-bg: linear-gradient(170deg, #07101B 0%, var(--navy) 100%);
+}
+
+/* ── Reduced-motion safety ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

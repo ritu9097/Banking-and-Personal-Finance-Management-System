@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0D1B2A">
+  <title>Create Account — Finora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+  <script>
+    (function(){document.documentElement.setAttribute('data-theme',localStorage.getItem('finora_theme')||'light');})();
+  </script>
+</head>
+
+<body class="auth-page register-page">
+
+<div class="auth-wrap">
+
+  <!-- ===================== LEFT VISUAL ===================== -->
+  <section class="auth-showcase register-showcase">
+    <div class="showcase-content">
+
+      <div class="auth-brand">
+        <span class="auth-logo">F</span>
+        <span>Finora</span>
+      </div>
+
+      <div class="showcase-copy register-copy">
+        <div class="mini-pill">
+          <span class="pulse-dot"></span>
+          YOUR MONEY ERA STARTS HERE
+        </div>
+        <h1>Build your<br><span>money era.</span></h1>
+        <p>One place to track your spending, build better habits and actually know where your money goes.</p>
+      </div>
+
+      <!-- Growth card -->
+      <div class="float-card growth-card">
+        <div class="growth-header" style="display:flex;justify-content:space-between;font-size:.7rem;opacity:.8;margin-bottom:6px">
+          <span>Your progress</span><span>2026</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+          <strong style="font-size:1.1rem;font-weight:800">₹42,680</strong>
+          <span style="font-size:.7rem;opacity:.75;color:var(--sage)">↗ 18.4%</span>
+        </div>
+        <div class="growth-bars">
+          <span style="height:35%"></span><span style="height:48%"></span><span style="height:42%"></span>
+          <span style="height:65%"></span><span style="height:58%"></span><span style="height:78%"></span><span style="height:92%"></span>
+        </div>
+      </div>
+
+      <!-- Habit card -->
+      <div class="float-card habit-card">
+        <div style="width:28px;height:28px;border-radius:8px;background:rgba(119,141,122,.3);display:grid;place-items:center;font-size:.85rem">✓</div>
+        <div>
+          <small style="opacity:.7;display:block">Money habit</small>
+          <strong style="font-size:.8rem;display:block">Budget on track</strong>
+          <span style="font-size:.7rem;opacity:.65">You're doing great ✦</span>
+        </div>
+      </div>
+
+      <!-- Goal card -->
+      <div class="float-card goal-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+          <span style="font-size:.9rem;opacity:.8">◎</span>
+          <small style="font-size:.55rem;font-weight:800;letter-spacing:.8px;opacity:.6">SAVINGS GOAL</small>
+        </div>
+        <strong style="font-size:1rem;font-weight:800;display:block;margin-bottom:5px">₹32,400</strong>
+        <div class="goal-line"><span></span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:5px">
+          <small style="opacity:.65">Dream trip</small>
+          <small style="opacity:.8">65%</small>
+        </div>
+      </div>
+
+      <div class="showcase-bottom">
+        <span>TRACK</span><span>PLAN</span><span>GROW</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===================== RIGHT FORM ===================== -->
+  <section class="auth-form-area">
+    <div class="auth-form-inner">
+
+      <div class="mobile-brand">
+        <span class="auth-logo">F</span>
+        <strong>Finora</strong>
+      </div>
+
+      <div class="login-heading register-heading">
+        <div class="welcome-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          New here?
+        </div>
+        <h2>Create your<br><span>money space.</span></h2>
+        <p>Set up your demo account in less than a minute.</p>
+      </div>
+
+
+      <form id="register" class="modern-login-form">
+
+        <!-- Full name -->
+        <label class="input-group">
+          <span class="input-label">Full name</span>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </span>
+            <input id="name" type="text" required autocomplete="name" placeholder="Your full name">
+          </div>
+        </label>
+
+        <!-- Email -->
+        <label class="input-group">
+          <span class="input-label">Email address</span>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            <input id="email" type="email" required autocomplete="email" placeholder="you@example.com">
+          </div>
+        </label>
+
+        <!-- Phone -->
+        <label class="input-group">
+          <span class="input-label">Phone number</span>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.5a16 16 0 0 0 5.5 5.5l1.06-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <input id="phone" type="tel" required autocomplete="tel" placeholder="+91 98765 43210">
+          </div>
+        </label>
+
+        <!-- Password -->
+        <label class="input-group">
+          <span class="input-label">Password</span>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            <input id="password" type="password" minlength="6" required autocomplete="new-password" placeholder="Create a password">
+            <button class="password-toggle" type="button" id="toggleRegisterPassword" aria-label="Show password" title="Toggle password visibility">
+              <svg id="eyeIcon1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <div class="password-strength">
+            <div class="strength-bars"><span></span><span></span><span></span><span></span></div>
+            <small id="strengthText">Use 6+ characters</small>
+          </div>
+        </label>
+
+        <!-- Confirm password -->
+        <label class="input-group">
+          <span class="input-label">Confirm password</span>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <input id="confirm" type="password" required autocomplete="new-password" placeholder="Repeat your password">
+            <button class="password-toggle" type="button" id="toggleConfirmPassword" aria-label="Show password" title="Toggle password visibility">
+              <svg id="eyeIcon2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </label>
+
+        <div id="error" class="login-error"></div>
+
+        <button class="login-button register-button" type="submit">
+          <span>Create my account</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </button>
+
+      </form>
+
+      <div class="auth-divider"><span></span><small>ALREADY A USER?</small><span></span></div>
+
+      <p class="create-account">
+        Already have an account? <a href="login.html">Sign in <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+      </p>
+
+      <div class="login-footer">
+        <span>🔒 Demo environment</span>
+        <span>•</span>
+        <span>No real money involved</span>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+
+<script src="js/app.js"></script>
+
+<script>
+  const EYE     = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  const EYE_OFF = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+
+  function setupToggle(btnId, inputId, iconId) {
+    const btn   = document.getElementById(btnId);
+    const input = document.getElementById(inputId);
+    const icon  = document.getElementById(iconId);
+    if (!btn || !input) return;
+    btn.addEventListener('click', () => {
+      const hidden = input.type === 'password';
+      input.type   = hidden ? 'text' : 'password';
+      if (icon) icon.innerHTML = hidden ? EYE_OFF : EYE;
+      btn.setAttribute('aria-label', hidden ? 'Hide password' : 'Show password');
+    });
+  }
+
+  setupToggle('toggleRegisterPassword', 'password', 'eyeIcon1');
+  setupToggle('toggleConfirmPassword',  'confirm',  'eyeIcon2');
+
+  /* Password strength */
+  const pwInput      = document.getElementById('password');
+  const bars         = document.querySelectorAll('.strength-bars span');
+  const strengthText = document.getElementById('strengthText');
+
+  if (pwInput) {
+    pwInput.addEventListener('input', () => {
+      const v = pwInput.value;
+      let s = 0;
+      if (v.length >= 6)              s++;
+      if (v.length >= 9)              s++;
+      if (/[A-Z]/.test(v))            s++;
+      if (/[0-9!@#$%^&*]/.test(v))    s++;
+      bars.forEach((b, i) => b.classList.toggle('active', i < s));
+      strengthText.textContent = !v ? 'Use 6+ characters'
+        : s <= 1 ? 'Weak password'
+        : s === 2 ? 'Getting stronger'
+        : s === 3 ? 'Good password'
+        : 'Strong password ✦';
+    });
+  }
+</script>
+
+</body>
+</html>

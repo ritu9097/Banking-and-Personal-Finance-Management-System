@@ -1,0 +1,31 @@
+/* =========================================================
+   FINORA — BUDGETS STYLES
+   ========================================================= */
+
+.budget-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.budget-item:last-child {
+  border-bottom: 0;
+}
+
+.budget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.budget-top b {
+  font-size: .9rem;
+  color: var(--text);
+}
+
+.budget-top span {
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text-2);
+}

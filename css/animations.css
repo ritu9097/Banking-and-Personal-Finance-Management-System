@@ -1,0 +1,96 @@
+/* =========================================================
+   FINORA — ANIMATIONS
+   Subtle, purposeful. Respects prefers-reduced-motion.
+   ========================================================= */
+
+/* ── Keyframes ──────────────────────────────────────────── */
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scalein {
+  from { opacity: 0; transform: scale(.96) translateY(4px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes slidein {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideup {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes barrise {
+  from { transform: scaleY(0); transform-origin: bottom; }
+  to   { transform: scaleY(1); transform-origin: bottom; }
+}
+
+@keyframes progress-fill {
+  from { width: 0 !important; }
+}
+
+/* ── Page fade-in ───────────────────────────────────────── */
+.app,
+.auth-wrap,
+.auth-wrap,
+.landing > div {
+  animation: fadein .4s ease both;
+}
+
+/* Stagger content cards */
+.content > * {
+  animation: slideup .35s ease both;
+}
+
+.content > *:nth-child(1) { animation-delay: .05s; }
+.content > *:nth-child(2) { animation-delay: .10s; }
+.content > *:nth-child(3) { animation-delay: .15s; }
+.content > *:nth-child(4) { animation-delay: .18s; }
+.content > *:nth-child(5) { animation-delay: .21s; }
+
+/* ── Cash-flow bars ─────────────────────────────────────── */
+.cash-month {
+  animation: slideup .4s var(--ease) both;
+}
+
+.cash-month:nth-child(1) { animation-delay: .05s; }
+.cash-month:nth-child(2) { animation-delay: .10s; }
+.cash-month:nth-child(3) { animation-delay: .15s; }
+.cash-month:nth-child(4) { animation-delay: .20s; }
+.cash-month:nth-child(5) { animation-delay: .25s; }
+.cash-month:nth-child(6) { animation-delay: .30s; }
+
+/* ── Progress bars animate on load ─────────────────────── */
+.progress span { animation: progress-fill .7s var(--ease) both; }
+
+/* ── Sidebar link active indicator ─────────────────────── */
+.sidebar nav a.active::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 3px; height: 18px;
+  border-radius: 0 3px 3px 0;
+  background: var(--sage);
+}
+
+/* ── Modal ──────────────────────────────────────────────── */
+/* defined in components (animation: scalein) */
+
+/* ── Toast slide-in ─────────────────────────────────────── */
+/* defined in components (animation: slidein) */
+
+/* ── Sidebar transition on mobile ──────────────────────── */
+.sidebar {
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Button press ripple ────────────────────────────────── */
+.btn:active { transition-duration: .05s; }
+
+/* ── Icon button tooltip ────────────────────────────────── */
+[title] { position: relative; }
