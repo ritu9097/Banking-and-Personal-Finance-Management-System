@@ -1,0 +1,52 @@
+/* =========================================================
+   FINORA — BASE RESET & ROOT STYLES
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button { cursor: pointer; }
+
+img, svg { max-width: 100%; display: block; }
+
+ul, ol { list-style: none; margin: 0; padding: 0; }
+
+/* ── Utility helpers ────────────────────────────────────── */
+.hidden { display: none !important; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.muted { color: var(--text-3); }
+.pos   { color: var(--pos); font-weight: 600; font-variant-numeric: tabular-nums; }
+.neg   { color: var(--neg); font-weight: 600; font-variant-numeric: tabular-nums; }
+.full  { width: 100%; }
+.center { justify-content: center; }
+.empty {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-3);
+  font-size: .875rem;
+}

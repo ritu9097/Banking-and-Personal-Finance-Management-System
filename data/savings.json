@@ -1,0 +1,50 @@
+[
+  {
+    "id": "s1",
+    "userId": "u001",
+    "name": "New Laptop",
+    "target": 80000,
+    "current": 42000,
+    "date": "2027-03-01"
+  },
+  {
+    "id": "s2",
+    "userId": "u001",
+    "name": "Emergency Fund",
+    "target": 100000,
+    "current": 65000,
+    "date": "2027-06-01"
+  },
+  {
+    "id": "s3",
+    "userId": "u002",
+    "name": "New Phone",
+    "target": 50000,
+    "current": 28000,
+    "date": "2027-01-15"
+  },
+  {
+    "id": "s4",
+    "userId": "u002",
+    "name": "Vacation",
+    "target": 90000,
+    "current": 36000,
+    "date": "2027-05-01"
+  },
+  {
+    "id": "s5",
+    "userId": "u003",
+    "name": "Higher Studies",
+    "target": 150000,
+    "current": 62000,
+    "date": "2028-06-01"
+  },
+  {
+    "id": "s6",
+    "userId": "u003",
+    "name": "Emergency Fund",
+    "target": 80000,
+    "current": 31000,
+    "date": "2027-04-01"
+  }
+]

@@ -1,0 +1,70 @@
+/* =========================================================
+   FINORA — ACCOUNTS STYLES
+   ========================================================= */
+
+.account-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.bank-card {
+  min-height: 180px;
+  color: #fff;
+  border: 0;
+  background: linear-gradient(145deg, var(--navy), var(--slate));
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bank-card:nth-child(2n) {
+  background: linear-gradient(145deg, var(--slate), var(--steel-blue));
+}
+
+.bank-card:nth-child(3n) {
+  background: linear-gradient(145deg, #2D4A3E, var(--sage));
+}
+
+.bank-card:hover {
+  border-color: transparent;
+}
+
+.bank-card::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -110px;
+  top: -120px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 25px rgba(255,255,255,.03);
+  pointer-events: none;
+}
+
+.bank-card h2 {
+  margin: 16px 0;
+  font-size: 1.55rem;
+  letter-spacing: -.5px;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.bank-card .muted {
+  color: rgba(255,255,255,.68);
+  font-size: .75rem;
+}
+
+.bank-bottom {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.bank-number {
+  letter-spacing: 2px;
+  font-size: .85rem;
+  font-family: inherit;
+}

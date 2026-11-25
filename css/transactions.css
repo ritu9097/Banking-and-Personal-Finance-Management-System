@@ -1,0 +1,24 @@
+/* =========================================================
+   FINORA — TRANSACTIONS STYLES
+   ========================================================= */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.filter {
+  width: 220px;
+}
+
+.table tbody tr td b {
+  color: var(--text);
+  font-size: .875rem;
+}
+
+.table tbody tr td small {
+  color: var(--text-3);
+  font-size: .75rem;
+}

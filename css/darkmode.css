@@ -1,0 +1,86 @@
+/* =========================================================
+   FINORA — DARK MODE OVERRIDES
+   Applied via [data-theme="dark"] on <html>
+   ========================================================= */
+
+/* ── Topbar ─────────────────────────────────────────────── */
+[data-theme="dark"] .topbar h1 { color: var(--text); }
+
+/* ── Cards / surfaces ───────────────────────────────────── */
+[data-theme="dark"] .card,
+[data-theme="dark"] .quick,
+[data-theme="dark"] .modal,
+[data-theme="dark"] .search-popover,
+[data-theme="dark"] .notification-popover {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* ── Tables ─────────────────────────────────────────────── */
+[data-theme="dark"] .table th,
+[data-theme="dark"] .table td {
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .table tbody tr:hover {
+  background: var(--surface-alt);
+}
+
+/* ── Form controls ──────────────────────────────────────── */
+[data-theme="dark"] .input,
+[data-theme="dark"] .select,
+[data-theme="dark"] textarea.input {
+  background: var(--surface-alt);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+[data-theme="dark"] label { color: var(--text-2); }
+
+/* ── Icon buttons ───────────────────────────────────────── */
+[data-theme="dark"] .icon-btn,
+[data-theme="dark"] .avatar,
+[data-theme="dark"] .menu,
+[data-theme="dark"] .theme-toggle {
+  background: var(--surface-alt);
+  border-color: var(--border);
+  color: var(--text-2);
+}
+
+/* ── Progress / stat ────────────────────────────────────── */
+[data-theme="dark"] .progress { background: var(--surface-alt); }
+[data-theme="dark"] .stat-icon { background: var(--surface-alt); }
+[data-theme="dark"] .profile-avatar { background: var(--surface-alt); color: var(--text); }
+
+/* ── Close button ───────────────────────────────────────── */
+[data-theme="dark"] .close {
+  background: var(--surface-alt);
+  border-color: var(--border);
+  color: var(--text-2);
+}
+
+/* ── Secondary button ───────────────────────────────────── */
+[data-theme="dark"] .btn.secondary {
+  background: var(--surface-alt);
+  border-color: var(--border);
+  color: var(--text-2);
+}
+
+/* ── Topbar background ──────────────────────────────────── */
+[data-theme="dark"] .topbar {
+  background: var(--topbar-bg);
+  border-color: var(--topbar-border);
+}
+
+/* ── Landing ────────────────────────────────────────────── */
+[data-theme="dark"] .landing { background: var(--bg); }
+[data-theme="dark"] .landing h1 { color: var(--text); }
+
+/* ── Popover items ──────────────────────────────────────── */
+[data-theme="dark"] .search-item,
+[data-theme="dark"] .notification-item {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+

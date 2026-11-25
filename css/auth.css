@@ -1,0 +1,510 @@
+/* =========================================================
+   FINORA — AUTH PAGES (login.html, register.html)
+   Two-column layout: visual left + form right
+   ========================================================= */
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(107,130,153,.1), transparent 30%),
+    radial-gradient(circle at 90% 80%, rgba(119,141,122,.08), transparent 30%),
+    var(--bg);
+}
+
+/* ── Two-panel shell ────────────────────────────────────── */
+.auth-wrap {
+  width: min(960px, 100%);
+  min-height: 660px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border);
+}
+
+/* ── Left visual panel ──────────────────────────────────── */
+.auth-showcase {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px;
+  color: #fff;
+  background: linear-gradient(145deg, var(--navy) 0%, #1A3350 55%, var(--slate) 100%);
+  overflow: hidden;
+}
+
+.auth-showcase::after {
+  content: "";
+  position: absolute;
+  width: 340px; height: 340px;
+  right: -170px; bottom: -170px;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 50%;
+  box-shadow: 0 0 0 40px rgba(255,255,255,.02),
+              0 0 0 80px rgba(255,255,255,.01);
+  pointer-events: none;
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.auth-logo {
+  width: 34px; height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  font-weight: 900;
+  font-size: .9rem;
+}
+
+/* Mini pill above headline */
+.mini-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 99px;
+  font-size: .625rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 20px;
+}
+
+.pulse-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--sage);
+  animation: pulse 1.8s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .6; transform: scale(1.3); }
+}
+
+.showcase-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.showcase-copy h1 {
+  margin: 0 0 20px;
+  color: #fff;
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  line-height: 1.08;
+  letter-spacing: -.8px;
+  max-width: 320px;
+}
+
+.showcase-copy h1 span { color: var(--beige); }
+.showcase-copy p  { color: rgba(255,255,255,.75); font-size: .9rem; line-height: 1.7; max-width: 300px; }
+
+.showcase-bottom {
+  position: absolute;
+  bottom: 32px;
+  left: 48px;
+  display: flex;
+  gap: 18px;
+  font-size: .5625rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,.35);
+}
+
+/* Float cards (kept visible on desktop, hidden mobile) */
+.float-card {
+  position: absolute;
+  padding: 14px 16px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: .8125rem;
+}
+
+.balance-float { bottom: 90px; right: 20px; width: 170px; }
+.savings-float { top: 55%;  right: 18px; width: 160px; display: flex; gap: 10px; align-items: center; }
+.spending-float { bottom: 180px; right: 24px; width: 160px; display: flex; gap: 10px; align-items: center; }
+.growth-card  { bottom: 90px; right: 20px; width: 170px; }
+.habit-card   { top: 50%; right: 24px; width: 170px; display: flex; gap: 10px; align-items: center; }
+.goal-card    { bottom: 180px; right: 20px; width: 160px; }
+
+/* Hide float cards that add noise on medium screens */
+@media (max-width: 1100px) {
+  .float-card { display: none; }
+  .showcase-copy h1 { font-size: 1.8rem; }
+}
+
+/* Mini chart inside float card */
+.mini-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 36px;
+  margin-top: 8px;
+}
+
+.mini-chart span {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  background: rgba(255,255,255,.35);
+}
+
+/* Saving progress bar */
+.saving-progress {
+  height: 4px;
+  background: rgba(255,255,255,.2);
+  border-radius: 10px;
+  margin: 5px 0;
+  overflow: hidden;
+}
+
+.saving-progress span {
+  display: block;
+  height: 100%;
+  width: 65%;
+  background: var(--sage);
+  border-radius: 10px;
+}
+
+/* Growth bars in register card */
+.growth-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 44px;
+  margin-top: 10px;
+}
+
+.growth-bars span {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  background: rgba(119,141,122,.7);
+}
+
+.goal-line {
+  height: 4px;
+  background: rgba(255,255,255,.18);
+  border-radius: 10px;
+  margin: 7px 0;
+  overflow: hidden;
+}
+
+.goal-line span {
+  display: block;
+  height: 100%;
+  width: 65%;
+  background: var(--sage);
+  border-radius: 10px;
+}
+
+/* ── Right form area ────────────────────────────────────── */
+.auth-form-area {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  padding: 0;
+}
+
+.auth-form-inner {
+  width: 100%;
+  padding: 44px;
+}
+
+/* Mobile brand (shown only when showcase is hidden) */
+.mobile-brand {
+  display: none;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 40px;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+@media (max-width: 760px) {
+  .mobile-brand { display: flex; }
+}
+
+/* Login heading */
+.login-heading { margin-bottom: 24px; }
+
+.welcome-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .625rem;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--steel-blue);
+  margin-bottom: 10px;
+}
+
+.login-heading h2, .register-heading h2 {
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  letter-spacing: -.5px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.login-heading h2 span, .register-heading h2 span { color: var(--navy); }
+
+.login-heading p, .register-heading p {
+  color: var(--text-3);
+  font-size: .875rem;
+}
+
+/* ── Form ───────────────────────────────────────────────── */
+.modern-login-form { display: grid; gap: 13px; }
+
+.input-group { display: grid; gap: 6px; }
+
+.input-label {
+  font-size: .6875rem;
+  font-weight: 700;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.input-wrap { position: relative; }
+
+.input-wrap input {
+  width: 100%;
+  height: 42px;
+  padding: 0 42px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  font-size: .875rem;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.input-wrap input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(107,130,153,.1);
+}
+
+.input-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-3);
+  pointer-events: none;
+  display: flex;
+}
+
+.input-icon svg { width: 16px; height: 16px; stroke-width: 2; }
+
+.password-toggle {
+  position: absolute;
+  right: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--text-3);
+  display: flex;
+  padding: 4px;
+  border-radius: 5px;
+  transition: color var(--t-fast);
+}
+
+.password-toggle:hover { color: var(--text-2); }
+.password-toggle svg { width: 15px; height: 15px; stroke-width: 2; }
+
+/* Login button */
+.login-button, .register-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 44px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 100%);
+  font-weight: 700;
+  font-size: .9rem;
+  box-shadow: 0 6px 18px rgba(13,27,42,.18);
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
+}
+
+.login-button:hover, .register-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(13,27,42,.24);
+}
+
+.button-arrow { font-size: .85rem; opacity: .8; }
+
+/* Login error */
+.login-error { color: var(--neg); font-size: .75rem; min-height: 16px; }
+
+/* Demo section */
+.demo-section {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.demo-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(--text-3);
+  font-size: .5625rem;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.demo-line { flex: 1; height: 1px; background: var(--border); }
+
+.demo-users { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+
+.demo-user {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color var(--t-fast), background var(--t-fast), transform var(--t-fast);
+}
+
+.demo-user:hover {
+  border-color: var(--border-focus);
+  background: var(--surface-alt);
+  transform: translateY(-1px);
+}
+
+.demo-avatar {
+  width: 28px; height: 28px;
+  min-width: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  font-size: .6875rem;
+  font-weight: 800;
+}
+
+.avatar-purple { background: rgba(107,130,153,.15); color: var(--steel-blue); }
+.avatar-blue   { background: rgba(13,27,42,.12);    color: var(--slate); }
+.avatar-sage   { background: rgba(119,141,122,.18);  color: var(--sage); }
+
+/* Keep old class names from login.html */
+.demo-avatar.riya  { background: rgba(107,130,153,.15); color: var(--steel-blue); }
+.demo-avatar.rahul { background: rgba(13,27,42,.12);    color: var(--slate); }
+.demo-avatar.priya { background: rgba(119,141,122,.18);  color: var(--sage); }
+
+.demo-details { min-width: 0; }
+.demo-details strong { display: block; color: var(--text); font-size: .75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.demo-details small  { display: block; color: var(--text-3); font-size: .625rem; }
+
+.demo-arrow { font-size: .75rem; color: var(--text-3); margin-left: auto; }
+
+/* Auth divider */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0;
+  color: var(--text-3);
+  font-size: .625rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.auth-divider span {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Create account link */
+.create-account { text-align: center; color: var(--text-3); font-size: .8125rem; }
+.create-account a { color: var(--text); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+
+/* Login footer */
+.login-footer {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-3);
+  font-size: .625rem;
+}
+
+/* Password strength */
+.password-strength { display: flex; align-items: center; gap: 8px; margin-top: 7px; }
+.strength-bars { display: flex; gap: 4px; }
+.strength-bars span {
+  width: 28px; height: 3px;
+  border-radius: 10px;
+  background: var(--border);
+  transition: background var(--t-fast);
+}
+.strength-bars span.active { background: var(--sage); }
+#strengthText { font-size: .6875rem; color: var(--text-3); }
+
+/* Noise overlay (decorative) */
+.noise, .glow { display: none; }
+
+/* ── Dark mode auth ─────────────────────────────────────── */
+[data-theme="dark"] .auth-page {
+  background:
+    radial-gradient(circle at 10% 20%, rgba(107,130,153,.08), transparent 30%),
+    var(--bg);
+}
+
+[data-theme="dark"] .auth-wrap,
+[data-theme="dark"] .auth-form-area {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .input-wrap input,
+[data-theme="dark"] .modern-login-form input {
+  background: var(--surface-alt);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+[data-theme="dark"] .demo-user {
+  background: var(--surface-alt);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .login-heading h2,
+[data-theme="dark"] .register-heading h2 {
+  color: var(--text);
+}

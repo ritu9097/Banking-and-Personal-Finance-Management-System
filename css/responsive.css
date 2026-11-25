@@ -1,0 +1,115 @@
+/* =========================================================
+   FINORA — RESPONSIVE
+   Desktop ▶ Laptop ▶ Tablet ▶ Mobile
+   ========================================================= */
+
+/* ── 1200px: collapse wider grids ──────────────────────── */
+@media (max-width: 1200px) {
+  .stats        { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .account-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .two          { grid-template-columns: 1fr; }
+  .three        { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+/* ── 900px: sidebar collapses ───────────────────────────── */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 220px; }
+
+  .sidebar {
+    transform: translateX(-105%);
+    box-shadow: none;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .main     { margin-left: 0 !important; }
+  .menu     { display: grid; }
+  .topbar   { padding: 0 16px; }
+  .content  { padding: 14px 16px 48px; }
+
+  .topbar p { display: none; }
+}
+
+/* ── 760px: single-column stacking ─────────────────────── */
+@media (max-width: 760px) {
+  .stats,
+  .account-grid,
+  .three,
+  .quick-grid { grid-template-columns: 1fr; }
+
+  .form-grid  { grid-template-columns: 1fr; }
+  .filter     { width: 100%; }
+
+  .topbar h1 { font-size: .95rem; }
+
+  /* Tables: scroll horizontally rather than breaking */
+  .table-wrap { border-radius: var(--radius-sm); }
+
+  /* Auth pages collapse to single-column */
+  .auth-wrap {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    border-radius: var(--radius-lg);
+  }
+
+  .auth-showcase      { display: none; }
+  .auth-form-area     { padding: 32px 24px; }
+  .auth-form-inner    { padding: 0; }
+  .demo-users         { grid-template-columns: 1fr; }
+  .auth-page          { padding: 20px 14px; }
+
+  /* Cards slightly smaller */
+  .card  { padding: 16px; }
+  .hero  { padding: 20px; }
+  .hero h2 { font-size: 1.3rem; }
+
+  .section-head { flex-wrap: wrap; align-items: flex-start; }
+  .top-right .icon-btn:first-child { display: none; }
+}
+
+/* ── 480px: mobile fine-tuning ──────────────────────────── */
+@media (max-width: 480px) {
+  .content  { padding: 10px 12px 40px; }
+  .card     { padding: 14px; }
+
+  .auth-page {
+    padding: 14px 10px;
+    align-items: flex-start;
+  }
+
+  .auth-wrap { border-radius: var(--radius); }
+
+  .auth-form-area { padding: 24px 18px; }
+
+  .landing h1 { font-size: 2rem; }
+
+  /* Hide extra icon buttons on small phones */
+  .top-right .icon-btn { display: none; }
+
+  .stat h2 { font-size: 1.25rem; }
+
+  .topbar { height: 60px; }
+
+  .hero::after { display: none; }
+}
+
+/* ── Spending row stack on small ────────────────────────── */
+@media (max-width: 540px) {
+  .spending-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .spending-row .spending-track {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Print ──────────────────────────────────────────────── */
+@media print {
+  .sidebar, .topbar, .btn, .modal-bg { display: none !important; }
+  .main { margin-left: 0 !important; }
+  .card { box-shadow: none; border: 1px solid #ccc; }
+}
