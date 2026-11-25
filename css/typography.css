@@ -1,0 +1,70 @@
+/* =========================================================
+   FINORA — TYPOGRAPHY
+   DM Sans only. Tabular numerals for financial figures.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap');
+
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+/* ── Headings ───────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -.3px;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+h1 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.5px; }
+h2 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+h3 { font-size: 1.05rem; }
+
+/* ── Body copy ──────────────────────────────────────────── */
+p { margin: 0; }
+small { font-size: .8125rem; }
+b, strong { font-weight: 700; }
+
+/* ── Eyebrow / label ────────────────────────────────────── */
+.eyebrow {
+  font-size: .625rem;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--steel-blue);
+}
+
+/* ── Monospaced / tabular numbers ───────────────────────── */
+.tabular,
+[data-count],
+.stat h2,
+.balance,
+.bank-card h2,
+.amount,
+.pos,
+.neg {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.3px;
+}
+
+/* ── Form labels ────────────────────────────────────────── */
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--text-2);
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+/* ── Links in text ──────────────────────────────────────── */
+.link {
+  color: var(--slate);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

@@ -1,0 +1,328 @@
+/* =========================================================
+   FINORA — LAYOUT (app shell, sidebar, topbar, content)
+   ========================================================= */
+
+/* ── App shell ──────────────────────────────────────────── */
+.app {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ── Sidebar ────────────────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: var(--sidebar-w);
+  padding: 20px 12px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid rgba(255,255,255,.05);
+  display: flex;
+  flex-direction: column;
+  z-index: 30;
+  transition: transform var(--t-slow);
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px 28px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -.25px;
+}
+
+.logo {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--sage), var(--steel-blue));
+  color: #fff;
+  font-weight: 900;
+  font-size: .95rem;
+  flex-shrink: 0;
+}
+
+/* Nav section label */
+.side-title {
+  padding: 0 10px 8px;
+  color: rgba(247,245,239,.32);
+  font-size: .5625rem;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+/* Nav links */
+.sidebar nav {
+  display: grid;
+  gap: 3px;
+}
+
+.sidebar nav a,
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 11px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--sidebar-text);
+  font-size: .875rem;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+  transition: color var(--t-fast), background var(--t-fast), transform var(--t-fast);
+  position: relative;
+}
+
+.sidebar nav a svg,
+.logout svg {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  stroke-width: 2;
+  opacity: .75;
+  transition: opacity var(--t-fast);
+}
+
+.sidebar nav a:hover,
+.logout:hover {
+  color: var(--sidebar-text-active);
+  background: rgba(255,255,255,.07);
+  transform: translateX(2px);
+}
+
+.sidebar nav a:hover svg,
+.logout:hover svg {
+  opacity: 1;
+}
+
+.sidebar nav a.active {
+  color: var(--sidebar-text-active);
+  background: var(--sidebar-active-bg);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--sidebar-active-border);
+}
+
+.sidebar nav a.active svg {
+  opacity: 1;
+}
+
+/* Logout button at bottom */
+.logout {
+  margin-top: auto;
+  color: rgba(247,245,239,.5);
+}
+
+/* ── Mobile overlay ─────────────────────────────────────── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(2px);
+}
+.overlay.show { display: block; }
+
+/* ── Main area ──────────────────────────────────────────── */
+.main {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--sidebar-w);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Topbar ─────────────────────────────────────────────── */
+.topbar {
+  height: 72px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--topbar-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--topbar-border);
+  transition: background var(--t-slow), border-color var(--t-slow);
+}
+
+.topbar h1 {
+  font-size: 1.1rem;
+  letter-spacing: -.3px;
+  margin: 2px 0;
+}
+
+.topbar p {
+  margin: 0;
+  font-size: .75rem;
+  color: var(--text-3);
+}
+
+/* Top-right icon cluster */
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.icon-btn,
+.avatar,
+.menu {
+  width: 38px; height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  color: var(--text-2);
+  transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+  position: relative;
+}
+
+.icon-btn svg, .avatar svg, .menu svg {
+  width: 16px; height: 16px;
+  stroke-width: 2;
+}
+
+.icon-btn:hover, .avatar:hover, .menu:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-focus);
+}
+
+.avatar {
+  background: linear-gradient(135deg, var(--surface-alt), var(--border));
+  color: var(--navy);
+  font-weight: 800;
+  font-size: .8rem;
+  letter-spacing: -.5px;
+  text-decoration: none;
+}
+
+.menu { display: none; }
+
+/* Theme toggle */
+.theme-toggle {
+  width: 38px; height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  color: var(--text-2);
+  transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+}
+
+.theme-toggle svg {
+  width: 16px; height: 16px;
+  stroke-width: 2;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-focus);
+}
+
+/* Auth-page theme toggle */
+.auth-theme-toggle {
+  position: fixed;
+  top: 16px; right: 16px;
+  z-index: 100;
+  width: 38px; height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  color: var(--text-2);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Notification dot ───────────────────────────────────── */
+.notification-dot {
+  position: absolute;
+  top: 7px; right: 7px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--neg);
+  border: 1.5px solid var(--surface);
+}
+
+/* ── Content area ───────────────────────────────────────── */
+.content {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 20px 28px 56px;
+  flex: 1;
+}
+
+/* ── Grids ──────────────────────────────────────────────── */
+.grid  { display: grid; gap: 16px; }
+.stats { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.two   { grid-template-columns: minmax(0,2fr) minmax(260px,1fr); }
+.three { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.account-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.quick-grid   { grid-template-columns: repeat(2, minmax(0,1fr)); }
+
+/* ── Section headers ────────────────────────────────────── */
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 24px 0 12px;
+}
+
+.section-head h2 {
+  font-size: 1.05rem;
+  letter-spacing: -.2px;
+}
+
+.actions, .filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+/* ── Landing page ───────────────────────────────────────── */
+.landing {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 24px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(107,130,153,.1), transparent 35%),
+    radial-gradient(circle at 25% 80%, rgba(119,141,122,.08), transparent 35%),
+    var(--bg);
+}
+
+.landing > div { max-width: 680px; }
+.landing h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin: 20px 0 12px; }
+.landing p  { color: var(--text-2); font-size: 1.05rem; line-height: 1.7; }
+.landing small { display: block; margin-top: 16px; color: var(--text-3); font-size: .8rem; }
+
+/* ── Hide balance mode ──────────────────────────────────── */
+[data-hide-balance="true"] .stat h2,
+[data-hide-balance="true"] .bank-card h2,
+[data-hide-balance="true"] [data-count],
+[data-hide-balance="true"] .hero strong,
+[data-hide-balance="true"] .table td.pos,
+[data-hide-balance="true"] .table td.neg,
+[data-hide-balance="true"] .spending-row b,
+[data-hide-balance="true"] .goal-item h2,
+[data-hide-balance="true"] .mask-balance {
+  filter: blur(8px);
+  user-select: none;
+  transition: filter .2s ease;
+}
+
